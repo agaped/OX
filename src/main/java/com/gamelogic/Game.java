@@ -15,5 +15,6 @@ public class Game {
 
     public void start() {
         this.currentState.start(reader);
+        this.currentState.nextState();
     }
 }
