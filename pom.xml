@@ -19,6 +19,23 @@
     <description>Implementation of TicTacToe console game in java using TDD methodology</description>
     <url>https://github.com/agaped/TicTacToe</url>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+</build>
+
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
