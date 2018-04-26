@@ -1,5 +1,8 @@
 package com.gamelogic;
 
+import com.gamelogic.states.GameState;
+import com.gamelogic.states.InitialState;
+
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 

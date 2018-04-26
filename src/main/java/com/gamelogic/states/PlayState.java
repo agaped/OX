@@ -1,4 +1,8 @@
-package com.gamelogic;
+package com.gamelogic.states;
+
+import com.gamelogic.Board;
+import com.gamelogic.Coordinates;
+import com.gamelogic.Player;
 
 import java.util.function.Consumer;
 

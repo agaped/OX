@@ -1,4 +1,4 @@
-package com.gamelogic;
+package com.gamelogic.states;
 
 import java.util.function.Consumer;
 
