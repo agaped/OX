@@ -20,7 +20,7 @@ public class Game {
     }
 
     public void start() {
-        //game configuration to implement
+        //todo: game configuration to implement
         this.currentState=new InitialState(gameConfig);
         gameConfig.setBoardSize(output,userInputProvider);
         while (true) {
