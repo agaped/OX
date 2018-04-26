@@ -1,7 +1,7 @@
 TicTacToe
  
-A console game based on simple state machine
+A console game based on a simple state machine
 
 To run it:
-mvn clean install
+mvn clean install 
 java -jar /target/ <name>.jar
