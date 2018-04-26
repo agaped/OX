@@ -3,17 +3,21 @@ package com.gamelogic.states;
 import com.gamelogic.Board;
 import com.gamelogic.Coordinates;
 import com.gamelogic.Player;
+import com.gamelogic.VictoryChecker;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class PlayState implements GameState {
 
     private Player currentPlayer;
     private Board board;
-    private int i=0;
-    public PlayState(Player startingPlayer, Board board) {
+    private VictoryChecker victoryChecker;
+
+    public PlayState(Player startingPlayer, Board board, VictoryChecker victoryChecker) {
         this.currentPlayer = startingPlayer;
         this.board = board;
+        this.victoryChecker = victoryChecker;
     }
 
     @Override
@@ -27,10 +31,13 @@ public class PlayState implements GameState {
 
         this.board.addMove(Coordinates.parse(userInput), currentPlayer);
 
-        while(i++<3) {
-            currentPlayer = currentPlayer.getOppositePlayer();
-            return this;
-        }
-        return new EndState();
+            Optional<Player> optionalWinner= victoryChecker.isThereAWinner();
+                    if(optionalWinner.isPresent()){
+                        return new VictoryState(optionalWinner.get());
+                    }else {
+                        currentPlayer = currentPlayer.getOppositePlayer();
+                        return this;
+                    }
     }
+
 }
