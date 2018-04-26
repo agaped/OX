@@ -20,8 +20,9 @@ public class Game {
     }
 
     public void start() {
-        //game configuration
+        //game configuration to implement
         this.currentState=new InitialState(gameConfig);
+        gameConfig.setBoardSize(output,userInputProvider);
         while (true) {
             playGame();
         }
