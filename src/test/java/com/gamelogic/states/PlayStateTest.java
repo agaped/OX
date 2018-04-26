@@ -24,20 +24,20 @@ public class PlayStateTest {
     @Test
     public void checkIfMoveToTheNextStateWorksForPlayState_staysAtPlayState(){
         //given
-        GameState play=new PlayState(Player.X,new Board(), new VictoryChecker());
+        GameState play=new PlayState(Player.X,new Board(new GameConfig()), new VictoryChecker());
 
         //when
         play=play.moveToTheNextState("1 1");
 
 
         //then
-        assertEquals(play.getClass(), new PlayState(Player.X,new Board(), new VictoryChecker()).getClass());
+        assertEquals(play.getClass(), new PlayState(Player.X,new Board(new GameConfig()), new VictoryChecker()).getClass());
     }
 
     @Test
     public void checkIfMoveToTheNextStateWorksForPlayState_moveToVictoryState(){
         //given
-        GameState play=new PlayState(Player.X,new Board(), new VictoryChecker());
+        GameState play=new PlayState(Player.X,new Board(new GameConfig()), new VictoryChecker());
 
         //when
         play=play.moveToTheNextState("1 1");

@@ -23,7 +23,7 @@ public class InitialState implements GameState{
     @Override
     public GameState moveToTheNextState(String userInput) {
         Player startingPlayer = Player.valueOf(userInput);
-        return new PlayState(startingPlayer, new Board(), new VictoryChecker());
+        return new PlayState(startingPlayer, new Board(gameConfig), new VictoryChecker());
     }
 
 }
