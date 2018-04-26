@@ -1,10 +1,10 @@
 package com.gamelogic;
 
-import java.util.Scanner;
+import java.util.function.Consumer;
 
 public interface GameState {
 
-    void start(Scanner reader);
+    void beginCurrentState(Consumer<String> output);
 
-    GameState nextState();
+    GameState moveToTheNextState(String userInput);
 }

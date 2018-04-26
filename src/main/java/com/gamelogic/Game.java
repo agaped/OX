@@ -1,20 +1,31 @@
 package com.gamelogic;
 
-import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class Game {
 
-    private Scanner reader;
-    private Player currentPlayer;
     private GameState currentState;
+    private Supplier<String> userInputProvider;
+    private Consumer<String> output;
+    private GameConfig gameConfig;
 
-    public Game(GameState initialState) {
-        this.currentState = initialState;
-        reader = new Scanner(System.in);
+    public Game(Supplier<String> userInputProvider, Consumer<String> output, GameConfig gameConfig) {
+        this.userInputProvider = userInputProvider;
+        this.output = output;
+        this.gameConfig = gameConfig;
     }
 
     public void start() {
-        this.currentState.start(reader);
-        this.currentState.nextState();
+        //game configuration
+        this.currentState=new InitialState(gameConfig);
+        while (true) {
+            playGame();
+        }
+    }
+
+    private void playGame() {
+        this.currentState.beginCurrentState(output);
+        this.currentState=this.currentState.moveToTheNextState(userInputProvider.get());
     }
 }
