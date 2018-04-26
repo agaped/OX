@@ -6,6 +6,7 @@ import com.gamelogic.Player;
 import com.gamelogic.VictoryChecker;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class InitialState implements GameState{
 
@@ -21,8 +22,8 @@ public class InitialState implements GameState{
     }
 
     @Override
-    public GameState moveToTheNextState(String userInput) {
-        Player startingPlayer = Player.valueOf(userInput);
+    public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
+        Player startingPlayer = Player.valueOf(userInputProvider.get());
         return new PlayState(startingPlayer, new Board(gameConfig), new VictoryChecker());
     }
 

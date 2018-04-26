@@ -31,6 +31,6 @@ public class Game {
 
     private void playGame() {
         this.currentState.beginCurrentState(output);
-        this.currentState=this.currentState.moveToTheNextState(userInputProvider.get());
+        this.currentState=this.currentState.moveToTheNextState(userInputProvider,output);
     }
 }

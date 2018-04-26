@@ -7,6 +7,7 @@ import com.gamelogic.VictoryChecker;
 
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class PlayState implements GameState {
 
@@ -27,9 +28,9 @@ public class PlayState implements GameState {
     }
 
     @Override
-    public GameState moveToTheNextState(String userInput) {
+    public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
 
-        this.board.addMove(Coordinates.parse(userInput), currentPlayer);
+        this.board.addMove(Coordinates.parse(userInputProvider.get()), currentPlayer, output);
 
             Optional<Player> optionalWinner= victoryChecker.isThereAWinner();
                     if(optionalWinner.isPresent()){

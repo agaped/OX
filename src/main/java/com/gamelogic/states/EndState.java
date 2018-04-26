@@ -1,9 +1,9 @@
 package com.gamelogic.states;
 
-import com.gamelogic.Coordinates;
 import com.gamelogic.GameConfig;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class EndState implements GameState {
     @Override
@@ -12,7 +12,7 @@ public class EndState implements GameState {
     }
 
     @Override
-    public GameState moveToTheNextState(String userInput) {
+    public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
         return new InitialState(new GameConfig());
     }
 }
