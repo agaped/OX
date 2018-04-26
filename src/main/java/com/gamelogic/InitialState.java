@@ -1,33 +1,24 @@
 package com.gamelogic;
 
-import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class InitialState implements GameState{
 
+    private GameConfig gameConfig;
 
-    private Player currentPlayer;
-    private Board board;
-
-    @Override
-    public void start(Scanner reader) {
-        System.out.println("Welcome in XO, who shall start?");
-        this.currentPlayer = Player.valueOf(reader.nextLine());
-
-        System.out.println("Provide board dimensions x y: ");
-        int x = Integer.parseInt(reader.next());
-        int y = Integer.parseInt(reader.next());
-
-        System.out.println("Provide k-lenght winning combination ");
-        int k = Integer.parseInt(reader.next());
-
-        this.board=new Board(x,y,k);
-
+    public InitialState(GameConfig gameConfig) {
+        this.gameConfig=gameConfig;
     }
 
     @Override
-    public GameState nextState() {
-        return new PlayState(board);
+    public void beginCurrentState(Consumer<String> output) {
+        output.accept("Welcome to XO, who shall start?");
     }
 
+    @Override
+    public GameState moveToTheNextState(String userInput) {
+        Player startingPlayer = Player.valueOf(userInput);
+        return new PlayState(startingPlayer, new Board());
+    }
 
 }
