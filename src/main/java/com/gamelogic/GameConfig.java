@@ -6,11 +6,10 @@ import java.util.function.Supplier;
 public class GameConfig {
 
     private int maxNumberOfMatches=3;
-    private int numberToWin;
+    private int numberCombinationToWin;
     private Coordinates boardCoordinates;
     private int boardLength;
     private int boardWidth;
-    private Board board;
 
 
     public void setBoardSize(Consumer<String> output, Supplier<String> userInput) {
@@ -18,6 +17,11 @@ public class GameConfig {
         boardCoordinates=Coordinates.parse(userInput.get());
         this.boardLength=boardCoordinates.getX();
         this.boardWidth=boardCoordinates.getY();
+    }
+
+    public void setNumberCombinationToWin(Consumer<String> output, Supplier<String> userInput){
+        output.accept("Provide length of combination to win: ");
+        this.numberCombinationToWin=Integer.parseInt(userInput.get());
     }
 
     public int getBoardLength() {

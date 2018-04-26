@@ -23,6 +23,7 @@ public class Game {
         //todo: game configuration to implement
         this.currentState=new InitialState(gameConfig);
         gameConfig.setBoardSize(output,userInputProvider);
+        gameConfig.setNumberCombinationToWin(output,userInputProvider);
         while (true) {
             playGame();
         }
