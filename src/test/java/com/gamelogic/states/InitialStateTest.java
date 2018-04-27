@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
-import java.util.function.Supplier;
 
 import static org.testng.Assert.*;
 
