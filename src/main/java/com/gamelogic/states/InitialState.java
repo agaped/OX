@@ -20,19 +20,20 @@ public class InitialState implements GameState {
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         gameConfig.setBoardSize(output, userInputProvider);
         gameConfig.setNumberCombinationToWin(output, userInputProvider);
-        output.accept("Who shall start, X or O?");
     }
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
+        output.accept("Who shall start, X or O?");
         String userInput = userInputProvider.get();
-        if (!userInput.matches("[XO]")) {
+        while (!userInput.matches("[XO]"))
+        {
             output.accept("Wrong character, choose X or O");
+            userInput = userInputProvider.get();
             //todo: probably move to Message/Error handling State
-            return this;
         }
-
         Player startingPlayer = Player.valueOf(userInput);
+
         return new PlayState(startingPlayer, new Board(gameConfig), new VictoryChecker());
     }
 

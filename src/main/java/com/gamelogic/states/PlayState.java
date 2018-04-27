@@ -23,6 +23,7 @@ public class PlayState implements GameState {
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
+        output.accept("");
         this.board.printState(output);
         if (!this.board.isBoardFull())
             output.accept("Player " + currentPlayer + ", make your move");
