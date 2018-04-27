@@ -20,6 +20,7 @@ public class Board {
         }
     }
 
+    //todo: probably move to Message/Error handling State
     public void addMove(Coordinates coordinates, Player currentPlayer, Consumer<String> output) {
         int x = coordinates.getX() - 1;
         int y = coordinates.getY() - 1;
@@ -55,6 +56,16 @@ public class Board {
             output.accept(String.valueOf(this.boardState[i]));
         }
         output.accept(" ");
+    }
 
+    public boolean isBoardFull() {
+        for (int i = 0; i < boardState.length; i++) {
+            for (int j = 0; j < boardState[0].length; j++) {
+                if (checkIfMoveIsPossible(i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
