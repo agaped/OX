@@ -22,8 +22,8 @@ public class GameConfig {
         } while (!input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*"));
 
         boardCoordinates = Coordinates.parse(input);
-        this.boardWidth = boardCoordinates.getX();
-        this.boardLength = boardCoordinates.getY();
+        this.boardLength = boardCoordinates.getX();
+        this.boardWidth = boardCoordinates.getY();
     }
 
     //todo: validate user input
