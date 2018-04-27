@@ -11,7 +11,7 @@ public class GameConfig {
     private int boardLength;
     private int boardWidth;
 
-
+    //todo: probably move to Message/Error handling State
     public void setBoardSize(Consumer<String> output, Supplier<String> userInput) {
         String input;
         output.accept("Welcome to XO game!!!\nSome setup at the beggining...\n");
@@ -26,6 +26,7 @@ public class GameConfig {
         this.boardLength=boardCoordinates.getY();
     }
 
+    //todo: validate user input
     public void setNumberCombinationToWin(Consumer<String> output, Supplier<String> userInput){
         output.accept("Provide length of combination to win: ");
         this.numberCombinationToWin=Integer.parseInt(userInput.get());
