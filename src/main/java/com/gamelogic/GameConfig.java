@@ -13,6 +13,7 @@ public class GameConfig {
 
 
     public void setBoardSize(Consumer<String> output, Supplier<String> userInput) {
+        output.accept("Welcome to XO game!!!\nSome setup at the beggining...\n");
         output.accept("Provide board dimension y-vertical, x-horizontal: ");
         boardCoordinates=Coordinates.parse(userInput.get());
         this.boardLength=boardCoordinates.getX();

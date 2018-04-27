@@ -27,10 +27,10 @@ public class Board {
             if (checkIfMoveIsPossible(x, y)) {
                 this.boardState[x][y] = currentPlayer.name().charAt(0);
             } else {
-                output.accept("Move not possible! Loosing turn....");
+                output.accept("Move not possible! Loosing turn....\n");
             }
         } else {
-            output.accept("Wrong input! Loosing turn....");
+            output.accept("Wrong input! Loosing turn....\n");
         }
     }
 
@@ -54,6 +54,7 @@ public class Board {
         for (int i = 0; i < this.boardState.length; i++) {
             output.accept(String.valueOf(this.boardState[i]));
         }
+        output.accept(" ");
 
     }
 }
