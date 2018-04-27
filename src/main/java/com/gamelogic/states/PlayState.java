@@ -7,6 +7,7 @@ import com.gamelogic.VictoryChecker;
 
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class PlayState implements GameState {
 
@@ -21,23 +22,35 @@ public class PlayState implements GameState {
     }
 
     @Override
-    public void beginCurrentState(Consumer<String> output) {
+    public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
+        output.accept("");
         this.board.printState(output);
-        output.accept("Player " + currentPlayer + ", make your move");
+        if (!this.board.isBoardFull())
+            output.accept("Player " + currentPlayer + ", make your move");
     }
 
+    //todo: probably move to Message/Error handling State
     @Override
-    public GameState moveToTheNextState(String userInput) {
+    public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
+        if (this.board.isBoardFull()) {
+            return new DrawState();
+        }
 
-        this.board.addMove(Coordinates.parse(userInput), currentPlayer);
+        String input = userInputProvider.get();
+        if (!input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
+            output.accept("Wrong input! Provide move in a form: x y");
+            return this;
+        }
 
-            Optional<Player> optionalWinner= victoryChecker.isThereAWinner();
-                    if(optionalWinner.isPresent()){
-                        return new VictoryState(optionalWinner.get());
-                    }else {
-                        currentPlayer = currentPlayer.getOppositePlayer();
-                        return this;
-                    }
+        this.board.addMove(Coordinates.parse(input), currentPlayer, output);
+
+        Optional<Player> optionalWinner = victoryChecker.isThereAWinner();
+        if (optionalWinner.isPresent()) {
+            return new VictoryState(optionalWinner.get());
+        } else {
+            currentPlayer = currentPlayer.getOppositePlayer();
+            return this;
+        }
     }
 
 }

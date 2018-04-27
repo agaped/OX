@@ -14,7 +14,7 @@
 
     <groupId>com.academy</groupId>
     <artifactId>javaacademy</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
     <name>TicTacToe game</name>
     <description>Implementation of TicTacToe console game in java using TDD methodology</description>
     <url>https://github.com/agaped/TicTacToe</url>

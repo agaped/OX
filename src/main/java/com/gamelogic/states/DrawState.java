@@ -5,10 +5,12 @@ import com.gamelogic.GameConfig;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class EndState implements GameState {
+public class DrawState implements GameState {
+
+
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        output.accept("\nThanks for playing!\nStatistics:....");
+        output.accept("Draw!!!\n");
     }
 
     @Override

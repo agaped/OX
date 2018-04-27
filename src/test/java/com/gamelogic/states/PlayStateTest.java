@@ -8,6 +8,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Scanner;
+
 import static org.testng.Assert.*;
 
 public class PlayStateTest {
@@ -24,31 +28,17 @@ public class PlayStateTest {
     @Test
     public void checkIfMoveToTheNextStateWorksForPlayState_staysAtPlayState(){
         //given
-        GameState play=new PlayState(Player.X,new Board(), new VictoryChecker());
+        GameState play=new PlayState(Player.X,new Board(new GameConfig()), new VictoryChecker());
 
         //when
-        play=play.moveToTheNextState("1 1");
+        play=play.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
 
         //then
-        assertEquals(play.getClass(), new PlayState(Player.X,new Board(), new VictoryChecker()).getClass());
+        assertEquals(play.getClass(), new DrawState().getClass());
+
     }
 
-    @Test
-    public void checkIfMoveToTheNextStateWorksForPlayState_moveToVictoryState(){
-        //given
-        GameState play=new PlayState(Player.X,new Board(), new VictoryChecker());
-
-        //when
-        play=play.moveToTheNextState("1 1");
-        play=play.moveToTheNextState("1 1");
-        play=play.moveToTheNextState("1 1");
-        play=play.moveToTheNextState("1 1");
-
-        //then
-        assertEquals(play.getClass(), new VictoryState(Player.X).getClass());
-    }
-    
 
 
 

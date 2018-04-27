@@ -20,7 +20,7 @@ public class Game {
     }
 
     public void start() {
-        //game configuration
+        //todo: game configuration to implement
         this.currentState=new InitialState(gameConfig);
         while (true) {
             playGame();
@@ -28,7 +28,7 @@ public class Game {
     }
 
     private void playGame() {
-        this.currentState.beginCurrentState(output);
-        this.currentState=this.currentState.moveToTheNextState(userInputProvider.get());
+        this.currentState.beginCurrentState(output, userInputProvider);
+        this.currentState=this.currentState.moveToTheNextState(userInputProvider,output);
     }
 }

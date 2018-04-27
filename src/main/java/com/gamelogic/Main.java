@@ -8,5 +8,6 @@ public class Main {
 
         new Game(new Scanner(System.in)::nextLine,
                 System.out::println, new GameConfig()).start();
+
     }
 }

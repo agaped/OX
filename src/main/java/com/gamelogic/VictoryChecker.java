@@ -10,7 +10,7 @@ public class VictoryChecker {
 
     public Optional<Player> isThereAWinner() {
 
-        while(++i<=3){
+        while(++i<=7){
             return Optional.empty();
         }
         return Optional.of(X);
