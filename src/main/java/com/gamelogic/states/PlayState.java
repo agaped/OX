@@ -22,15 +22,19 @@ public class PlayState implements GameState {
     }
 
     @Override
-    public void beginCurrentState(Consumer<String> output) {
+    public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         this.board.printState(output);
         output.accept("Player " + currentPlayer + ", make your move");
     }
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
-
-        this.board.addMove(Coordinates.parse(userInputProvider.get()), currentPlayer, output);
+        String input=userInputProvider.get();
+        if(!input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")){
+            output.accept("Wrong input! Provide move in a form: x y");
+            return this;
+        }
+        this.board.addMove(Coordinates.parse(input), currentPlayer, output);
 
             Optional<Player> optionalWinner= victoryChecker.isThereAWinner();
                     if(optionalWinner.isPresent()){

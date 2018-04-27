@@ -17,7 +17,9 @@ public class InitialState implements GameState {
     }
 
     @Override
-    public void beginCurrentState(Consumer<String> output) {
+    public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
+        gameConfig.setBoardSize(output, userInputProvider);
+        gameConfig.setNumberCombinationToWin(output, userInputProvider);
         output.accept("Who shall start, X or O?");
     }
 

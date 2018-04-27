@@ -16,7 +16,7 @@ public class VictoryState implements GameState {
 
 
     @Override
-    public void beginCurrentState(Consumer<String> output) {
+    public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         output.accept("Winner is "+winner);
         output.accept("Dou you want to play again? y/n");
     }

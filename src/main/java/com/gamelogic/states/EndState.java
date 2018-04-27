@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 public class EndState implements GameState {
     @Override
-    public void beginCurrentState(Consumer<String> output) {
+    public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         output.accept("\nThanks for playing!\nStatistics:....");
     }
 
