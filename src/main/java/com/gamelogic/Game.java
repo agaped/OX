@@ -22,15 +22,13 @@ public class Game {
     public void start() {
         //todo: game configuration to implement
         this.currentState=new InitialState(gameConfig);
-        gameConfig.setBoardSize(output,userInputProvider);
-        gameConfig.setNumberCombinationToWin(output,userInputProvider);
         while (true) {
             playGame();
         }
     }
 
     private void playGame() {
-        this.currentState.beginCurrentState(output);
+        this.currentState.beginCurrentState(output, userInputProvider);
         this.currentState=this.currentState.moveToTheNextState(userInputProvider,output);
     }
 }

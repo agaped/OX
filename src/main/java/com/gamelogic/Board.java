@@ -25,7 +25,7 @@ public class Board {
         int y = coordinates.getY() - 1;
         if (checkIfUserInputIsCorrect(x, y)) {
             if (checkIfMoveIsPossible(x, y)) {
-                this.boardState[x][y] = currentPlayer.name().charAt(0);
+                this.boardState[y][x] = currentPlayer.name().charAt(0);
             } else {
                 output.accept("Move not possible! Loosing turn....\n");
             }
@@ -35,7 +35,7 @@ public class Board {
     }
 
     private boolean checkIfUserInputIsCorrect(int x, int y) {
-        if (x >= 0 && x < boardState.length && y >= 0 && y < boardState[0].length) {
+        if (y >= 0 && y < boardState.length && x >= 0 && x < boardState[0].length) {
             return true;
         } else {
             return false;
@@ -43,7 +43,7 @@ public class Board {
     }
 
     private boolean checkIfMoveIsPossible(int x, int y) {
-        if (this.boardState[x][y] == this.plusChar) {
+        if (this.boardState[y][x] == this.plusChar) {
             return true;
         } else {
             return false;

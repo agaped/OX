@@ -13,11 +13,17 @@ public class GameConfig {
 
 
     public void setBoardSize(Consumer<String> output, Supplier<String> userInput) {
+        String input;
         output.accept("Welcome to XO game!!!\nSome setup at the beggining...\n");
-        output.accept("Provide board dimension y-vertical, x-horizontal: ");
-        boardCoordinates=Coordinates.parse(userInput.get());
-        this.boardLength=boardCoordinates.getX();
-        this.boardWidth=boardCoordinates.getY();
+        do{
+            output.accept("Provide board dimension y-vertical, x-horizontal: ");
+            input=userInput.get();
+
+        }while(!input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*"));
+
+        boardCoordinates=Coordinates.parse(input);
+        this.boardWidth=boardCoordinates.getX();
+        this.boardLength=boardCoordinates.getY();
     }
 
     public void setNumberCombinationToWin(Consumer<String> output, Supplier<String> userInput){
