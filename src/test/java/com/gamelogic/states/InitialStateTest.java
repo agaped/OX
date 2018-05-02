@@ -1,9 +1,9 @@
 package com.gamelogic.states;
 
-import com.gamelogic.Board;
-import com.gamelogic.GameConfig;
-import com.gamelogic.Player;
-import com.gamelogic.VictoryChecker;
+import com.gamelogic.core.GameConfig;
+import com.gamelogic.core.NewBoard;
+import com.gamelogic.core.Player;
+import com.gamelogic.core.VictoryChecker;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
@@ -27,6 +27,6 @@ public class InitialStateTest {
         init = init.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
         //then
-        assertEquals(init.getClass(), new PlayState(Player.X, new Board(new GameConfig()), new VictoryChecker()).getClass());
+        assertEquals(init.getClass(), new PlayState(Player.X, new NewBoard(new GameConfig()), new VictoryChecker()).getClass());
     }
 }

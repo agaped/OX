@@ -1,8 +1,10 @@
-package com.gamelogic;
+package com.gamelogic.core;
+
+import com.gamelogic.core.Player;
 
 import java.util.Optional;
 
-import static com.gamelogic.Player.X;
+import static com.gamelogic.core.Player.X;
 
 public class VictoryChecker {
 
@@ -10,7 +12,7 @@ public class VictoryChecker {
 
     public Optional<Player> isThereAWinner() {
 
-        while(++i<=7){
+        while(++i<=30){
             return Optional.empty();
         }
         return Optional.of(X);

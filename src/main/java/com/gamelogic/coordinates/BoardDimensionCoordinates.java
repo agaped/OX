@@ -1,10 +1,10 @@
-package com.gamelogic;
+package com.gamelogic.coordinates;
 
-public class Coordinates {
+public class BoardDimensionCoordinates {
     private  int x;
     private  int y;
 
-    public Coordinates(int x, int y) {
+    public BoardDimensionCoordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -17,10 +17,10 @@ public class Coordinates {
         return y;
     }
 
-    public static Coordinates parse(String coordinatesAsString) {
+    public static BoardDimensionCoordinates parse(String coordinatesAsString) {
         String[] parts = coordinatesAsString.split(" ");
         int x = Integer.parseInt(parts[0]);
         int y = Integer.parseInt(parts[1]);
-        return new Coordinates(x, y);
+        return new BoardDimensionCoordinates(x, y);
     }
 }

@@ -1,9 +1,9 @@
 package com.gamelogic.states;
 
-import com.gamelogic.Board;
-import com.gamelogic.GameConfig;
-import com.gamelogic.Player;
-import com.gamelogic.VictoryChecker;
+import com.gamelogic.core.GameConfig;
+import com.gamelogic.core.NewBoard;
+import com.gamelogic.core.Player;
+import com.gamelogic.core.VictoryChecker;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 public class InitialState implements GameState {
 
     private GameConfig gameConfig;
+
 
     public InitialState(GameConfig gameConfig) {
         this.gameConfig = gameConfig;
@@ -34,7 +35,7 @@ public class InitialState implements GameState {
         }
         Player startingPlayer = Player.valueOf(userInput);
 
-        return new PlayState(startingPlayer, new Board(gameConfig), new VictoryChecker());
+        return new PlayState(startingPlayer, new NewBoard(gameConfig), new VictoryChecker());
     }
 
 }

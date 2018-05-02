@@ -8,4 +8,6 @@ public interface GameState {
     void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider);
 
     GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output);
+
+
 }

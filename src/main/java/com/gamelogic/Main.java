@@ -1,5 +1,7 @@
 package com.gamelogic;
 
+import com.gamelogic.core.GameConfig;
+
 import java.util.Scanner;
 
 public class Main {

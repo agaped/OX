@@ -1,9 +1,9 @@
 package com.gamelogic.states;
 
-import com.gamelogic.Board;
-import com.gamelogic.Coordinates;
-import com.gamelogic.Player;
-import com.gamelogic.VictoryChecker;
+import com.gamelogic.coordinates.BoardFieldCoordinate;
+import com.gamelogic.core.NewBoard;
+import com.gamelogic.core.Player;
+import com.gamelogic.core.VictoryChecker;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -12,10 +12,10 @@ import java.util.function.Supplier;
 public class PlayState implements GameState {
 
     private Player currentPlayer;
-    private Board board;
+    private NewBoard board;
     private VictoryChecker victoryChecker;
 
-    public PlayState(Player startingPlayer, Board board, VictoryChecker victoryChecker) {
+    public PlayState(Player startingPlayer, NewBoard board, VictoryChecker victoryChecker) {
         this.currentPlayer = startingPlayer;
         this.board = board;
         this.victoryChecker = victoryChecker;
@@ -37,12 +37,14 @@ public class PlayState implements GameState {
         }
 
         String input = userInputProvider.get();
-        if (!input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
-            output.accept("Wrong input! Provide move in a form: x y");
+        if (!input.matches("[1-9][0-9]*")) {
+            output.accept("Wrong input! Provide a move as a single number");
             return this;
         }
 
-        this.board.addMove(Coordinates.parse(input), currentPlayer, output);
+        if(!this.board.addMove(BoardFieldCoordinate.parse(input), currentPlayer, output)){
+            return this;
+        }
 
         Optional<Player> optionalWinner = victoryChecker.isThereAWinner();
         if (optionalWinner.isPresent()) {

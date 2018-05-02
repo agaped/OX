@@ -1,4 +1,4 @@
-package com.gamelogic;
+package com.gamelogic.core;
 
 public enum Player {
     X {

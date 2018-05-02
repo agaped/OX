@@ -1,6 +1,6 @@
 package com.gamelogic.states;
 
-import com.gamelogic.GameConfig;
+import com.gamelogic.core.GameConfig;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

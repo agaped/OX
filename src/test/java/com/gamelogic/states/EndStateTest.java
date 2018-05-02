@@ -1,6 +1,6 @@
 package com.gamelogic.states;
 
-import com.gamelogic.GameConfig;
+import com.gamelogic.core.GameConfig;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
