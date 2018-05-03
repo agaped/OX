@@ -1,9 +1,6 @@
-package com.gamelogic.states;
+package com.ox.states;
 
-import com.gamelogic.core.GameConfig;
-import com.gamelogic.core.NewBoard;
-import com.gamelogic.core.Player;
-import com.gamelogic.core.VictoryChecker;
+import com.ox.core.*;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
@@ -18,7 +15,7 @@ public class InitialStateTest {
     @Test
     public void checkIfMoveToTheNextStateWorksForInitialState_WhenCorrectInputProvided() {
         //given
-        GameState init = new InitialState(new GameConfig());
+        GameState init = new InitialState(new GameConfig(), new ScoreBoard());
         String input = "W\nX";
         InputStream in=new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -27,6 +24,6 @@ public class InitialStateTest {
         init = init.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
         //then
-        assertEquals(init.getClass(), new PlayState(Player.X, new NewBoard(new GameConfig()), new VictoryChecker()).getClass());
+        assertEquals(init.getClass(), new PlayState(Player.X, new NewBoard(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard()).getClass());
     }
 }

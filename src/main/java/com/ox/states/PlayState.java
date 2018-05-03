@@ -1,9 +1,7 @@
-package com.gamelogic.states;
+package com.ox.states;
 
-import com.gamelogic.coordinates.BoardFieldCoordinate;
-import com.gamelogic.core.NewBoard;
-import com.gamelogic.core.Player;
-import com.gamelogic.core.VictoryChecker;
+import com.ox.core.*;
+import com.ox.coordinates.BoardFieldCoordinate;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -14,11 +12,15 @@ public class PlayState implements GameState {
     private Player currentPlayer;
     private NewBoard board;
     private VictoryChecker victoryChecker;
+    private GameConfig gameConfig;
+    private ScoreBoard scoreBoard;
 
-    public PlayState(Player startingPlayer, NewBoard board, VictoryChecker victoryChecker) {
+    public PlayState(Player startingPlayer, NewBoard board, VictoryChecker victoryChecker, GameConfig gameConfig, ScoreBoard scoreBoard) {
         this.currentPlayer = startingPlayer;
         this.board = board;
         this.victoryChecker = victoryChecker;
+        this.gameConfig = gameConfig;
+        this.scoreBoard = scoreBoard;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class PlayState implements GameState {
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
         if (this.board.isBoardFull()) {
-            return new DrawState();
+            return new DrawState(scoreBoard, currentPlayer);
         }
 
         String input = userInputProvider.get();
@@ -46,9 +48,10 @@ public class PlayState implements GameState {
             return this;
         }
 
-        Optional<Player> optionalWinner = victoryChecker.isThereAWinner();
+        Optional<Player> optionalWinner = victoryChecker.isThereAWinner(BoardFieldCoordinate.parse(input),this.board,this.currentPlayer,this.gameConfig);
+//        Optional<Player> optionalWinner = RowCondition.isThereAVictory(BoardFieldCoordinate.parse(input),this.board,this.currentPlayer,this.gameConfig);
         if (optionalWinner.isPresent()) {
-            return new VictoryState(optionalWinner.get());
+            return new VictoryState(optionalWinner.get(), scoreBoard);
         } else {
             currentPlayer = currentPlayer.getOppositePlayer();
             return this;

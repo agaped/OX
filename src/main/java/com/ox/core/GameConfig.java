@@ -1,6 +1,6 @@
-package com.gamelogic.core;
+package com.ox.core;
 
-import com.gamelogic.coordinates.BoardDimensionCoordinates;
+import com.ox.coordinates.BoardDimensionCoordinates;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -58,5 +58,9 @@ public class GameConfig {
 
     public int getBoardColumn() {
         return this.boardColumn;
+    }
+
+    public int getNumberCombinationToWin() {
+        return numberCombinationToWin;
     }
 }

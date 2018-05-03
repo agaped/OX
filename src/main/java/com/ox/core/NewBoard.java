@@ -1,7 +1,8 @@
-package com.gamelogic.core;
+package com.ox.core;
 
-import com.gamelogic.coordinates.BoardFieldCoordinate;
+import com.ox.coordinates.BoardFieldCoordinate;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -18,7 +19,6 @@ public class NewBoard {
     }
 
     public boolean addMove(BoardFieldCoordinate boardFieldCoordinate, Player currentPlayer, Consumer<String> output) {
-        //todo:check if user input is correct e.g. 11 12 ...
         int field = boardFieldCoordinate.getX();
 
         if (checkIfUserInputIsCorrect(field)) {
@@ -90,4 +90,7 @@ public class NewBoard {
         return gameConfig.getBoardRow()*gameConfig.getBoardColumn();
     }
 
+    public Map<Integer, Character> getBoardState() {
+        return Collections.unmodifiableMap(this.boardState);
+    }
 }

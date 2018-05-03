@@ -1,4 +1,4 @@
-package com.gamelogic.core;
+package com.ox.core;
 
 public class TurnNumber {
 

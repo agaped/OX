@@ -1,9 +1,6 @@
-package com.gamelogic.states;
+package com.ox.states;
 
-import com.gamelogic.core.GameConfig;
-import com.gamelogic.core.NewBoard;
-import com.gamelogic.core.Player;
-import com.gamelogic.core.VictoryChecker;
+import com.ox.core.*;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -11,10 +8,11 @@ import java.util.function.Supplier;
 public class InitialState implements GameState {
 
     private GameConfig gameConfig;
+    private ScoreBoard scoreBoard;
 
-
-    public InitialState(GameConfig gameConfig) {
+    public InitialState(GameConfig gameConfig, ScoreBoard scoreBoard) {
         this.gameConfig = gameConfig;
+        this.scoreBoard = scoreBoard;
     }
 
     @Override
@@ -35,7 +33,7 @@ public class InitialState implements GameState {
         }
         Player startingPlayer = Player.valueOf(userInput);
 
-        return new PlayState(startingPlayer, new NewBoard(gameConfig), new VictoryChecker());
+        return new PlayState(startingPlayer, new NewBoard(gameConfig), new VictoryChecker(), gameConfig, scoreBoard);
     }
 
 }

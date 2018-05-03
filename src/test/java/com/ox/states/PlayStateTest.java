@@ -1,9 +1,6 @@
-package com.gamelogic.states;
+package com.ox.states;
 
-import com.gamelogic.core.GameConfig;
-import com.gamelogic.core.NewBoard;
-import com.gamelogic.core.Player;
-import com.gamelogic.core.VictoryChecker;
+import com.ox.core.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,14 +23,14 @@ public class PlayStateTest {
     @Test
     public void checkIfMoveToTheNextStateWorksForPlayState_staysAtPlayState(){
         //given
-        GameState play=new PlayState(Player.X,new NewBoard(new GameConfig()), new VictoryChecker());
+        GameState play=new PlayState(Player.X,new NewBoard(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard());
 
         //when
         play=play.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
 
         //then
-        assertEquals(play.getClass(), new DrawState().getClass());
+        assertEquals(play.getClass(), new DrawState(new ScoreBoard(), Player.X).getClass());
 
     }
 

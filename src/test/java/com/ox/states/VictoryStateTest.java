@@ -1,7 +1,8 @@
-package com.gamelogic.states;
+package com.ox.states;
 
-import com.gamelogic.core.GameConfig;
-import com.gamelogic.core.Player;
+import com.ox.core.GameConfig;
+import com.ox.core.Player;
+import com.ox.core.ScoreBoard;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
@@ -15,7 +16,7 @@ public class VictoryStateTest {
     @Test
     public void checkIfMoveToTheNextStateWorksForVictoryState_moveToInitialState(){
         //given
-        GameState victory=new VictoryState(Player.X);
+        GameState victory=new VictoryState(Player.X, new ScoreBoard());
         String input = "y";
         InputStream in=new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -23,12 +24,12 @@ public class VictoryStateTest {
         victory=victory.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
         //then
-        assertEquals(victory.getClass(), new InitialState(new GameConfig()).getClass());
+        assertEquals(victory.getClass(), new InitialState(new GameConfig(), new ScoreBoard()).getClass());
     }
     @Test
     public void checkIfMoveToTheNextStateWorksForVictoryState_moveToEndState(){
         //given
-        GameState victory=new VictoryState(Player.X);
+        GameState victory=new VictoryState(Player.X, new ScoreBoard());
         String input = "n";
         InputStream in=new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -36,6 +37,6 @@ public class VictoryStateTest {
         victory=victory.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
         //then
-        assertEquals(victory.getClass(), new EndState().getClass());
+        assertEquals(victory.getClass(), new EndState(new ScoreBoard()).getClass());
     }
 }

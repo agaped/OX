@@ -1,4 +1,4 @@
-package com.gamelogic.states;
+package com.ox.states;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

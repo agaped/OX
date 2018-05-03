@@ -1,4 +1,4 @@
-package com.gamelogic.coordinates;
+package com.ox.coordinates;
 
 public class BoardDimensionCoordinates {
     private  int x;
