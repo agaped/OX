@@ -12,7 +12,7 @@ public class GameConfig {
     private int boardRow;
     private int boardColumn;
 
-    public void setBoardSize(Consumer<String> output, Supplier<String> userInput) {
+    public void validateBoardSize(Consumer<String> output, Supplier<String> userInput) {
         String input;
 
         while (true) {
@@ -33,8 +33,7 @@ public class GameConfig {
         }
     }
 
-    //todo: validate user input
-    public void setNumberCombinationToWin(Consumer<String> output, Supplier<String> userInput) {
+    public void validateNumberCombinationToWin(Consumer<String> output, Supplier<String> userInput) {
         while (true) {
             output.accept("Provide length of combination to win: ");
             String input = userInput.get();

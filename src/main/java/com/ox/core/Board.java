@@ -5,53 +5,36 @@ import com.ox.coordinates.BoardFieldCoordinate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.function.Consumer;
 
 public class Board {
 
     private Map<Integer, Character> boardState;
     private GameConfig gameConfig;
+    private int rows;
+    private int columns;
 
 
     public Board(GameConfig gameConfig) {
         this.boardState = new HashMap<>();
         this.gameConfig = gameConfig;
+        this.columns=gameConfig.getBoardColumn();
+        this.rows=gameConfig.getBoardRow();
     }
 
-    public boolean addMove(BoardFieldCoordinate boardFieldCoordinate, Player currentPlayer, Consumer<String> output) {
+    public void addMove(BoardFieldCoordinate boardFieldCoordinate, Player currentPlayer) {
         int field = boardFieldCoordinate.getX();
-
-        if (checkIfUserInputIsCorrect(field)) {
-            if (!this.boardState.containsKey(field)) {
-                this.boardState.put(field, currentPlayer.name().charAt(0));
-                return true;
-            } else {
-                output.accept("Given field is occupied! Try again");
-                return false;
-            }
-        } else {
-            output.accept("Input is incorrect! Should not be greater than " + getMaxFieldsNumber());
-            return false;
-        }
-    }
-
-    private boolean checkIfUserInputIsCorrect(int field) {
-        if (field > 0 && field <= getMaxFieldsNumber()) {
-            return true;
-        } else {
-            return false;
-        }
+        this.boardState.put(field, currentPlayer.name().charAt(0));
     }
 
     public boolean isBoardFull() {
         int maxFieldsNumber = getMaxFieldsNumber();
         int currentFieldsNumber = boardState.keySet().size();
 
-        return (currentFieldsNumber < maxFieldsNumber) ? false : true;
+        return !(currentFieldsNumber < maxFieldsNumber);
     }
 
-    public void printState(Consumer<String> output) {
+    public void printBoardState(Consumer<String> output) {
         StringBuilder result = new StringBuilder();
         for (int i = 1; i <= getMaxFieldsNumber(); i++) {
 
@@ -80,7 +63,7 @@ public class Board {
             } else {
                 result.append(i);
             }
-            if (i % gameConfig.getBoardColumn() == 0) {
+            if (i % this.columns == 0) {
                 result.append("\n");
             }
         }
@@ -88,10 +71,18 @@ public class Board {
     }
 
     private int getMaxFieldsNumber() {
-        return gameConfig.getBoardRow() * gameConfig.getBoardColumn();
+        return this.columns * this.rows;
     }
 
     public Map<Integer, Character> getBoardState() {
         return Collections.unmodifiableMap(this.boardState);
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
     }
 }

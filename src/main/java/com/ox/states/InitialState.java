@@ -17,8 +17,8 @@ public class InitialState implements GameState {
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        gameConfig.setBoardSize(output, userInputProvider);
-        gameConfig.setNumberCombinationToWin(output, userInputProvider);
+        gameConfig.validateBoardSize(output, userInputProvider);
+        gameConfig.validateNumberCombinationToWin(output, userInputProvider);
     }
 
     @Override

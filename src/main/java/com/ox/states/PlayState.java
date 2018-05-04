@@ -26,7 +26,7 @@ public class PlayState implements GameState {
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         output.accept("");
-        this.board.printState(output);
+        this.board.printBoardState(output);
         if (!this.board.isBoardFull())
             output.accept("Player " + currentPlayer + ", make your move");
     }
@@ -39,13 +39,14 @@ public class PlayState implements GameState {
         }
 
         String input = userInputProvider.get();
-        if (!input.matches("[1-9][0-9]*")) {
-            output.accept("Wrong input! Provide a move as a single number");
+        if (!PlayerMoveHandler.validateInput(input,output)) {
             return this;
         }
 
-        if(!this.board.addMove(BoardFieldCoordinate.parse(input), currentPlayer, output)){
+        if(!PlayerMoveHandler.validateMoveAccordingToBoardState(BoardFieldCoordinate.parse(input),board,output)){
             return this;
+        }else {
+            this.board.addMove(BoardFieldCoordinate.parse(input), currentPlayer);
         }
 
         Optional<Player> optionalWinner = victoryChecker.isThereAWinner(BoardFieldCoordinate.parse(input),this.board,this.currentPlayer,this.gameConfig);
