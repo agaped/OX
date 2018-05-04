@@ -1,8 +1,8 @@
 package com.ox.coordinates;
 
 public class BoardDimensionCoordinates {
-    private  int x;
-    private  int y;
+    private int x;
+    private int y;
 
     public BoardDimensionCoordinates(int x, int y) {
         this.x = x;

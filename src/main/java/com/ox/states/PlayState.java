@@ -10,12 +10,12 @@ import java.util.function.Supplier;
 public class PlayState implements GameState {
 
     private Player currentPlayer;
-    private NewBoard board;
+    private Board board;
     private VictoryChecker victoryChecker;
     private GameConfig gameConfig;
     private ScoreBoard scoreBoard;
 
-    public PlayState(Player startingPlayer, NewBoard board, VictoryChecker victoryChecker, GameConfig gameConfig, ScoreBoard scoreBoard) {
+    public PlayState(Player startingPlayer, Board board, VictoryChecker victoryChecker, GameConfig gameConfig, ScoreBoard scoreBoard) {
         this.currentPlayer = startingPlayer;
         this.board = board;
         this.victoryChecker = victoryChecker;

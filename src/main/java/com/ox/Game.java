@@ -15,7 +15,7 @@ public class Game {
     private Supplier<String> userInputProvider;
     private Consumer<String> output;
     private GameConfig gameConfig;
-    private int turnNumberInOneGame=3;
+    private int turnNumberInOneGame = 3;
     private ScoreBoard scoreBoard;
 
     public Game(Supplier<String> userInputProvider, Consumer<String> output, GameConfig gameConfig, ScoreBoard scoreBoard) {
@@ -27,23 +27,23 @@ public class Game {
 
     public void start() {
         //todo: game configuration to implement
-        int turn=1;
+        int turn = 1;
         output.accept("Welcome to OX game!!!\nSome setup at the beginning...\n");
-        this.currentState=new InitialState(gameConfig,scoreBoard);
+        this.currentState = new InitialState(gameConfig, scoreBoard);
 
-        while (turn <=turnNumberInOneGame) {
+        while (turn <= turnNumberInOneGame) {
             playGame();
-            if(this.currentState.getClass().equals(new InitialState(gameConfig, scoreBoard).getClass())){
+            if (this.currentState.getClass().equals(new InitialState(gameConfig, scoreBoard).getClass())) {
                 turn++;
             }
         }
 
-        this.currentState=new EndState(scoreBoard);
+        this.currentState = new EndState(scoreBoard);
         playGame();
     }
 
     private void playGame() {
         this.currentState.beginCurrentState(output, userInputProvider);
-        this.currentState=this.currentState.moveToTheNextState(userInputProvider,output);
+        this.currentState = this.currentState.moveToTheNextState(userInputProvider, output);
     }
 }

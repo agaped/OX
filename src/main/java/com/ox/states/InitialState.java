@@ -32,7 +32,7 @@ public class InitialState implements GameState {
         }
         Player startingPlayer = Player.valueOf(userInput);
 
-        return new PlayState(startingPlayer, new NewBoard(gameConfig), new VictoryChecker(), gameConfig, scoreBoard);
+        return new PlayState(startingPlayer, new Board(gameConfig), new VictoryChecker(), gameConfig, scoreBoard);
     }
 
 }

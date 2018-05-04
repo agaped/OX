@@ -7,7 +7,7 @@ import com.ox.core.Player;
 
 import java.util.Optional;
 
-public class DiagonalCondition implements VictoryCondition {
+public class AntiDiagonalCondition implements VictoryCondition {
 
     @Override
     public Optional<Player> isThereAVictory(BoardFieldCoordinate lastMove, Board board, Player currentPlayer, GameConfig gameConfig) {
@@ -25,7 +25,7 @@ public class DiagonalCondition implements VictoryCondition {
         int currentRow = lastMoveRow;
         int currentColumn = lastMoveColumn;
         while (true) {
-            lastMoveColumn += 1;
+            lastMoveColumn -= 1;
             lastMoveRow += 1;
             start = lastMoveRow * gameConfig.getBoardColumn() + lastMoveColumn;
             if (board.getBoardState().get(start) != null && board.getBoardState().get(start).equals(currentChar)) {
@@ -35,7 +35,7 @@ public class DiagonalCondition implements VictoryCondition {
             }
         }
         while (true) {
-            currentColumn -= 1;
+            currentColumn += 1;
             currentRow -= 1;
             currentPosition = currentRow * gameConfig.getBoardColumn() + currentColumn;
             if (board.getBoardState().get(currentPosition) != null && board.getBoardState().get(currentPosition).equals(currentChar)) {

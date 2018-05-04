@@ -23,7 +23,7 @@ public class PlayStateTest {
     @Test
     public void checkIfMoveToTheNextStateWorksForPlayState_staysAtPlayState(){
         //given
-        GameState play=new PlayState(Player.X,new NewBoard(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard());
+        GameState play=new PlayState(Player.X,new Board(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard());
 
         //when
         play=play.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);

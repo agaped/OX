@@ -21,7 +21,7 @@ public class EndState implements GameState {
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        output.accept("\nThanks for playing!\nStatistics:\n");
+        output.accept("\nThanks for playing!\n\nStatistics:");
         for (Player key: this.scoreBoard.getScores().keySet()) {
              output.accept("Player "+key+" points: "+this.scoreBoard.getScores().get(key));
         }

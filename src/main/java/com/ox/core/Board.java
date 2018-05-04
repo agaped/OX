@@ -8,15 +8,14 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
-public class NewBoard {
+public class Board {
 
     private Map<Integer, Character> boardState;
     private GameConfig gameConfig;
 
 
-    public NewBoard(GameConfig gameConfig) {
-//        this.boardState = new HashMap<>();
-        this.boardState = new TreeMap<>();
+    public Board(GameConfig gameConfig) {
+        this.boardState = new HashMap<>();
         this.gameConfig = gameConfig;
     }
 
@@ -32,7 +31,7 @@ public class NewBoard {
                 return false;
             }
         } else {
-            output.accept("Input is incorrect! Should not be greater than "+ getMaxFieldsNumber());
+            output.accept("Input is incorrect! Should not be greater than " + getMaxFieldsNumber());
             return false;
         }
     }
@@ -53,43 +52,43 @@ public class NewBoard {
     }
 
     public void printState(Consumer<String> output) {
-        StringBuilder result=new StringBuilder();
-        for (int i = 1; i<= getMaxFieldsNumber(); i++){
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i <= getMaxFieldsNumber(); i++) {
 
             result.append(" ");
 
-            if(i<10) {
+            if (i < 10) {
                 result.append("   ");
             }
-            if(i>=10 && i<100) {
+            if (i >= 10 && i < 100) {
                 result.append("  ");
             }
-            if(i>=100 && i<1000) {
+            if (i >= 100 && i < 1000) {
                 result.append(" ");
             }
-            if(this.boardState.containsKey(i)){
-                if(i>=10){
+            if (this.boardState.containsKey(i)) {
+                if (i >= 10) {
                     result.append(" ");
                 }
-                if(i>=100){
+                if (i >= 100) {
                     result.append(" ");
                 }
-                if(i>=1000){
+                if (i >= 1000) {
                     result.append(" ");
                 }
                 result.append(this.boardState.get(i));
-            }else{
+            } else {
                 result.append(i);
             }
-            if(i%gameConfig.getBoardColumn()==0) {
+            if (i % gameConfig.getBoardColumn() == 0) {
                 result.append("\n");
             }
         }
         output.accept(result.toString());
     }
 
-    private int getMaxFieldsNumber(){
-        return gameConfig.getBoardRow()*gameConfig.getBoardColumn();
+    private int getMaxFieldsNumber() {
+        return gameConfig.getBoardRow() * gameConfig.getBoardColumn();
     }
 
     public Map<Integer, Character> getBoardState() {

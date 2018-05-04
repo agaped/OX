@@ -16,7 +16,7 @@ public class TurnNumber {
         this.turn = turn;
     }
 
-    public void increaseTurn(){
+    public void increaseTurn() {
         this.turn++;
     }
 }
