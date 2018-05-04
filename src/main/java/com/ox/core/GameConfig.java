@@ -12,23 +12,22 @@ public class GameConfig {
     private int boardRow;
     private int boardColumn;
 
-    //todo: probably move to Message/Error handling State
     public void setBoardSize(Consumer<String> output, Supplier<String> userInput) {
         String input;
 
-        while(true){
+        while (true) {
             output.accept("Provide board dimension - row and column: ");
             input = userInput.get();
-            if(input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")){
+            if (input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
                 boardDimensionCoordinates = BoardDimensionCoordinates.parse(input);
                 this.boardRow = boardDimensionCoordinates.getX();
                 this.boardColumn = boardDimensionCoordinates.getY();
-                if(this.getBoardRow()*this.getBoardColumn()<=10000){
+                if (this.getBoardRow() * this.getBoardColumn() <= 10000) {
                     break;
-                }else{
+                } else {
                     output.accept("Total size of the board cannot exceed 10 000. Try again");
                 }
-            }else{
+            } else {
                 output.accept("Wrong format! Try again");
             }
         }

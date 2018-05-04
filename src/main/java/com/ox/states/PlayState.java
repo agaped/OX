@@ -49,7 +49,6 @@ public class PlayState implements GameState {
         }
 
         Optional<Player> optionalWinner = victoryChecker.isThereAWinner(BoardFieldCoordinate.parse(input),this.board,this.currentPlayer,this.gameConfig);
-//        Optional<Player> optionalWinner = RowCondition.isThereAVictory(BoardFieldCoordinate.parse(input),this.board,this.currentPlayer,this.gameConfig);
         if (optionalWinner.isPresent()) {
             return new VictoryState(optionalWinner.get(), scoreBoard);
         } else {

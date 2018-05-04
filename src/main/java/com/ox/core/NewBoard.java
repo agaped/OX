@@ -5,6 +5,7 @@ import com.ox.coordinates.BoardFieldCoordinate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Consumer;
 
 public class NewBoard {
@@ -14,7 +15,8 @@ public class NewBoard {
 
 
     public NewBoard(GameConfig gameConfig) {
-        this.boardState = new HashMap<>();
+//        this.boardState = new HashMap<>();
+        this.boardState = new TreeMap<>();
         this.gameConfig = gameConfig;
     }
 

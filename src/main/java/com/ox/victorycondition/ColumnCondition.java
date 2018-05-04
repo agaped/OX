@@ -7,28 +7,28 @@ import com.ox.core.Player;
 
 import java.util.Optional;
 
-public class RowCondition implements VictoryCondition {
+public class ColumnCondition implements VictoryCondition {
 
     @Override
-    public Optional<Player> isThereAVictory(BoardFieldCoordinate lastMove, NewBoard board, Player currentPlayer, GameConfig gameConfig) {
+    public  Optional<Player> isThereAVictory(BoardFieldCoordinate lastMove, NewBoard board, Player currentPlayer, GameConfig gameConfig) {
 
-        int lastMoveRow= getLastMoveRow(lastMove, gameConfig);
+        int lastMoveColumn= getLastMoveColumn(lastMove, gameConfig);
         int winCondition = gameConfig.getNumberCombinationToWin();
         char currentChar = currentPlayer.name().charAt(0);
 
         int counter = 1;
         int start = lastMove.getX();
-        int endOfLastRow = (lastMoveRow+1)*gameConfig.getBoardColumn();
-        int beginningOfLastRow = endOfLastRow - (gameConfig.getBoardColumn() - 1);
+        int endOfLastColumn = gameConfig.getBoardColumn()*gameConfig.getBoardRow()-(gameConfig.getBoardColumn()-lastMoveColumn);
+        int beginningOfLastColumn = lastMoveColumn;
 
-        for (int i = start+1; i <= endOfLastRow; i++) {
+        for (int i = start+gameConfig.getBoardColumn(); i <= endOfLastColumn; i+=gameConfig.getBoardColumn()) {
             if (board.getBoardState().get(i)!=null && board.getBoardState().get(i).equals(currentChar)) {
                 counter++;
             }else{
                 break;
             }
         }
-        for (int i = start-1; i >=beginningOfLastRow; i--) {
+        for (int i = start-gameConfig.getBoardColumn(); i >=beginningOfLastColumn; i-=gameConfig.getBoardColumn()) {
             if (board.getBoardState().get(i)!=null && board.getBoardState().get(i).equals(currentChar)) {
                 counter++;
             }else{
@@ -42,11 +42,7 @@ public class RowCondition implements VictoryCondition {
         }
     }
 
-    private int getLastMoveRow(BoardFieldCoordinate lastMove, GameConfig gameConfig) {
-        if (lastMove.getX() % gameConfig.getBoardColumn() == 0) {
-            return lastMove.getX() / gameConfig.getBoardColumn() - 1;
-        }else{
-            return lastMove.getX() / gameConfig.getBoardColumn();
-        }
+    private int getLastMoveColumn(BoardFieldCoordinate lastMove, GameConfig gameConfig) {
+        return lastMove.getX()%gameConfig.getBoardColumn();
     }
 }

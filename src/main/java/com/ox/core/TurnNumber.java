@@ -4,8 +4,8 @@ public class TurnNumber {
 
     int turn;
 
-    public TurnNumber(int turn) {
-        this.turn = turn;
+    public TurnNumber() {
+        this.turn = 1;
     }
 
     public int getTurn() {

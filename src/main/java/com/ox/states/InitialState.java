@@ -29,7 +29,6 @@ public class InitialState implements GameState {
         {
             output.accept("Wrong character, choose X or O");
             userInput = userInputProvider.get();
-            //todo: probably move to Message/Error handling State
         }
         Player startingPlayer = Player.valueOf(userInput);
 
