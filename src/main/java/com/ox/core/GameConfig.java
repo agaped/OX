@@ -1,52 +1,33 @@
 package com.ox.core;
 
+import com.ox.validators.GameConfigValidator;
 import com.ox.coordinates.BoardDimensionCoordinates;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class GameConfig {
 
-    private int numberCombinationToWin;
     private BoardDimensionCoordinates boardDimensionCoordinates;
+    private int lengthOfCombinationToWin;
     private int boardRow;
     private int boardColumn;
 
-    public void validateBoardSize(Consumer<String> output, Supplier<String> userInput) {
-        String input;
+    public void setBoardSize(Consumer<String> output,Supplier<String> userInput, GameConfigValidator gameConfigValidator){
+        Optional<String> size=gameConfigValidator.validateBoardSize(output, userInput);
 
-        while (true) {
-            output.accept("Provide board dimension - row and column: ");
-            input = userInput.get();
-            if (input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
-                boardDimensionCoordinates = BoardDimensionCoordinates.parse(input);
-                this.boardRow = boardDimensionCoordinates.getX();
-                this.boardColumn = boardDimensionCoordinates.getY();
-                if (this.getBoardRow() * this.getBoardColumn() <= 10000) {
-                    break;
-                } else {
-                    output.accept("Total size of the board cannot exceed 10 000. Try again");
-                }
-            } else {
-                output.accept("Wrong format! Try again");
-            }
+        if(size.isPresent()) {
+            boardDimensionCoordinates = BoardDimensionCoordinates.parse(size.get());
+            this.boardRow = boardDimensionCoordinates.getX();
+            this.boardColumn = boardDimensionCoordinates.getY();
         }
     }
 
-    public void validateNumberCombinationToWin(Consumer<String> output, Supplier<String> userInput) {
-        while (true) {
-            output.accept("Provide length of combination to win: ");
-            String input = userInput.get();
-            int possibleCombination = 0;
-
-            if (input.matches("[1-9][0-9]*")) {
-                possibleCombination = Integer.parseInt(input);
-                if (possibleCombination <= this.boardRow || possibleCombination <= this.boardColumn) {
-                    this.numberCombinationToWin = possibleCombination;
-                    break;
-                }
-            }
-            output.accept("Impossible combination!!");
+    public void setLengthOfCombinationToWin(Consumer<String> output, Supplier<String> userInput, GameConfigValidator gameConfigValidator){
+        Optional<String> combination=gameConfigValidator.validateLengthOfCombinationToWin(output,userInput);
+        if(combination.isPresent()){
+            this.lengthOfCombinationToWin =Integer.parseInt(combination.get());
         }
     }
 
@@ -58,7 +39,7 @@ public class GameConfig {
         return this.boardColumn;
     }
 
-    public int getNumberCombinationToWin() {
-        return numberCombinationToWin;
+    public int getLengthOfCombinationToWin() {
+        return lengthOfCombinationToWin;
     }
 }

@@ -1,14 +1,15 @@
-package com.ox.core;
+package com.ox.validators;
 
 import com.ox.coordinates.BoardFieldCoordinate;
+import com.ox.core.Board;
 
 import java.util.function.Consumer;
 
-public class PlayerMoveHandler {
+public class PlayerMoveValidator {
 
     public static boolean validateInput(String input, Consumer<String> output) {
         if (!input.matches("[1-9][0-9]*")) {
-            output.accept("Wrong input! Provide a move as a single number");
+            output.accept("Wrong input! Try again");
             return false;
         }else{
             return true;

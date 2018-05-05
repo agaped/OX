@@ -1,5 +1,6 @@
 package com.ox.states;
 
+import com.ox.validators.GameConfigValidator;
 import com.ox.core.*;
 
 import java.util.function.Consumer;
@@ -9,16 +10,18 @@ public class InitialState implements GameState {
 
     private GameConfig gameConfig;
     private ScoreBoard scoreBoard;
+    private GameConfigValidator gameConfigValidator;
 
-    public InitialState(GameConfig gameConfig, ScoreBoard scoreBoard) {
+    public InitialState(GameConfig gameConfig, ScoreBoard scoreBoard, GameConfigValidator gameConfigValidator) {
         this.gameConfig = gameConfig;
         this.scoreBoard = scoreBoard;
+        this.gameConfigValidator = gameConfigValidator;
     }
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        gameConfig.validateBoardSize(output, userInputProvider);
-        gameConfig.validateNumberCombinationToWin(output, userInputProvider);
+        gameConfig.setBoardSize(output, userInputProvider, gameConfigValidator);
+        gameConfig.setLengthOfCombinationToWin(output, userInputProvider,gameConfigValidator);
     }
 
     @Override

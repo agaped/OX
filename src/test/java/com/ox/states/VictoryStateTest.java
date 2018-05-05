@@ -1,12 +1,11 @@
 package com.ox.states;
 
 import com.ox.core.GameConfig;
+import com.ox.validators.GameConfigValidator;
 import com.ox.core.Player;
 import com.ox.core.ScoreBoard;
 import org.testng.annotations.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Scanner;
 
 import static org.testng.Assert.assertEquals;
@@ -21,7 +20,7 @@ public class VictoryStateTest {
         victory=victory.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
         //then
-        assertEquals(victory.getClass(), new InitialState(new GameConfig(), new ScoreBoard()).getClass());
+        assertEquals(victory.getClass(), new InitialState(new GameConfig(), new ScoreBoard(), new GameConfigValidator()).getClass());
     }
 
 }

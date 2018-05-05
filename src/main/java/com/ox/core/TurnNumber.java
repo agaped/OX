@@ -1,22 +1,16 @@
 package com.ox.core;
 
-public class TurnNumber {
+public enum TurnNumber {
+    TURN_NUMBER(3);
 
-    int turn;
+    private int maxTurnNumberInOneGame;
 
-    public TurnNumber() {
-        this.turn = 1;
+    TurnNumber(int maxTurnNumberInOneGame) {
+        this.maxTurnNumberInOneGame = maxTurnNumberInOneGame;
     }
 
-    public int getTurn() {
-        return turn;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
-    public void increaseTurn() {
-        this.turn++;
+    public int getMaxTurnNumberInOneGame() {
+        return maxTurnNumberInOneGame;
     }
 }
+

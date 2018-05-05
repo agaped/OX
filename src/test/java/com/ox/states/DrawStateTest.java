@@ -1,6 +1,7 @@
 package com.ox.states;
 
 import com.ox.core.GameConfig;
+import com.ox.validators.GameConfigValidator;
 import com.ox.core.Player;
 import com.ox.core.ScoreBoard;
 import org.testng.annotations.Test;
@@ -20,6 +21,6 @@ public class DrawStateTest {
         draw = draw.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
 
         //then
-        assertEquals(draw.getClass(), new InitialState(new GameConfig(), new ScoreBoard()).getClass());
+        assertEquals(draw.getClass(), new InitialState(new GameConfig(), new ScoreBoard(), new GameConfigValidator()).getClass());
     }
 }

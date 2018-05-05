@@ -1,5 +1,6 @@
 package com.ox.states;
 
+import com.ox.validators.GameConfigValidator;
 import com.ox.core.*;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ public class InitialStateTest {
     @Test
     public void checkIfMoveToTheNextStateWorksForInitialState_WhenCorrectInputProvided() {
         //given
-        GameState init = new InitialState(new GameConfig(), new ScoreBoard());
+        GameState init = new InitialState(new GameConfig(), new ScoreBoard(), new GameConfigValidator());
         String input = "W\nX";
         InputStream in=new ByteArrayInputStream(input.getBytes());
         System.setIn(in);

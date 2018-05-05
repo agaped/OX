@@ -13,7 +13,7 @@ public class ColumnCondition implements VictoryCondition {
     public Optional<Player> isThereAVictory(BoardFieldCoordinate lastMove, Board board, Player currentPlayer, GameConfig gameConfig) {
 
         int lastMoveColumn = getLastMoveColumn(lastMove, gameConfig);
-        int winCondition = gameConfig.getNumberCombinationToWin();
+        int winCondition = gameConfig.getLengthOfCombinationToWin();
         char currentChar = currentPlayer.name().charAt(0);
 
         int counter = 1;

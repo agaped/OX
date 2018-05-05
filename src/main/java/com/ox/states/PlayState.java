@@ -1,5 +1,6 @@
 package com.ox.states;
 
+import com.ox.validators.PlayerMoveValidator;
 import com.ox.core.*;
 import com.ox.coordinates.BoardFieldCoordinate;
 
@@ -31,7 +32,6 @@ public class PlayState implements GameState {
             output.accept("Player " + currentPlayer + ", make your move");
     }
 
-    //todo: probably move to Message/Error handling State
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
         if (this.board.isBoardFull()) {
@@ -39,11 +39,11 @@ public class PlayState implements GameState {
         }
 
         String input = userInputProvider.get();
-        if (!PlayerMoveHandler.validateInput(input,output)) {
+        if (!PlayerMoveValidator.validateInput(input,output)) {
             return this;
         }
 
-        if(!PlayerMoveHandler.validateMoveAccordingToBoardState(BoardFieldCoordinate.parse(input),board,output)){
+        if(!PlayerMoveValidator.validateMoveAccordingToBoardState(BoardFieldCoordinate.parse(input),board,output)){
             return this;
         }else {
             this.board.addMove(BoardFieldCoordinate.parse(input), currentPlayer);

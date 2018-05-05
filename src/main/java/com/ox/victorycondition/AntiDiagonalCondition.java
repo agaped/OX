@@ -16,7 +16,7 @@ public class AntiDiagonalCondition implements VictoryCondition {
         int lastMoveRow = getLastMoveRow(lastMove.getX(), gameConfig);
         int start = lastMove.getX();
 
-        int winCondition = gameConfig.getNumberCombinationToWin();
+        int winCondition = gameConfig.getLengthOfCombinationToWin();
         char currentChar = currentPlayer.name().charAt(0);
 
         int counter = 1;
