@@ -3,12 +3,13 @@ package com.ox.validators;
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class PlayerMoveValidator {
 
     public static boolean validateInput(String input, Consumer<String> output) {
-        if (!input.matches("[1-9][0-9]*")) {
+        if (input==null || !input.matches("[1-9][0-9]*")) {
             output.accept("Wrong input! Try again");
             return false;
         }else{

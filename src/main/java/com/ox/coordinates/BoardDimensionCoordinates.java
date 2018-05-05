@@ -1,5 +1,7 @@
 package com.ox.coordinates;
 
+import java.util.Objects;
+
 public class BoardDimensionCoordinates {
     private int x;
     private int y;
@@ -22,5 +24,20 @@ public class BoardDimensionCoordinates {
         int x = Integer.parseInt(parts[0]);
         int y = Integer.parseInt(parts[1]);
         return new BoardDimensionCoordinates(x, y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BoardDimensionCoordinates that = (BoardDimensionCoordinates) o;
+        return x == that.x &&
+                y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(x, y);
     }
 }
