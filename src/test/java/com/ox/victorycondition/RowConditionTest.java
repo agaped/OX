@@ -36,12 +36,12 @@ public class RowConditionTest {
     @Test
     public void isThereAVictory_PlayerXWins_GivenFieldsAreInARow() {
 
-        boardSize = "3 2";
+        boardSize = "3 3";
         inSize = new ByteArrayInputStream(boardSize.getBytes());
         System.setIn(inSize);
         gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
-        winCombination = "2";
+        winCombination = "3";
         inWin = new ByteArrayInputStream(winCombination.getBytes());
         System.setIn(inWin);
         gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
@@ -49,6 +49,7 @@ public class RowConditionTest {
         Board board = new Board(gameConfig);
         board.addMove(new BoardFieldCoordinate(1), X);
         board.addMove(new BoardFieldCoordinate(2), X);
+        board.addMove(new BoardFieldCoordinate(3), X);
 
         assertEquals(Optional.of(X), rowCondition.isThereAVictory(new BoardFieldCoordinate(2), board, X, gameConfig));
     }
