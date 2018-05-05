@@ -25,20 +25,20 @@ public class AntiDiagonalCondition implements VictoryCondition {
         int currentRow = lastMoveRow;
         int currentColumn = lastMoveColumn;
         while (true) {
-            lastMoveColumn -= 1;
-            lastMoveRow += 1;
+            lastMoveColumn += 1;
+            lastMoveRow -= 1;
             start = lastMoveRow * gameConfig.getBoardColumn() + lastMoveColumn;
-            if (board.getBoardState().get(start) != null && board.getBoardState().get(start).equals(currentChar)) {
+            if ((lastMoveRow >= 0 && lastMoveColumn <=gameConfig.getBoardColumn()) && board.getBoardState().get(start) != null && board.getBoardState().get(start).equals(currentChar)) {
                 counter++;
             } else {
                 break;
             }
         }
         while (true) {
-            currentColumn += 1;
-            currentRow -= 1;
+            currentColumn -= 1;
+            currentRow += 1;
             currentPosition = currentRow * gameConfig.getBoardColumn() + currentColumn;
-            if (board.getBoardState().get(currentPosition) != null && board.getBoardState().get(currentPosition).equals(currentChar)) {
+            if ((currentRow <=gameConfig.getBoardRow() && currentColumn > 0) && board.getBoardState().get(currentPosition) != null && board.getBoardState().get(currentPosition).equals(currentChar)) {
                 counter++;
             } else {
                 break;
@@ -61,6 +61,10 @@ public class AntiDiagonalCondition implements VictoryCondition {
     }
 
     private int getLastMoveColumn(int lastMove, GameConfig gameConfig) {
-        return lastMove % gameConfig.getBoardColumn();
+        if (lastMove % gameConfig.getBoardColumn() == 0) {
+            return lastMove % gameConfig.getBoardColumn() + gameConfig.getBoardColumn();
+        } else {
+            return lastMove % gameConfig.getBoardColumn();
+        }
     }
 }

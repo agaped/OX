@@ -19,16 +19,16 @@ public class DiagonalCondition implements VictoryCondition {
         int winCondition = gameConfig.getLengthOfCombinationToWin();
         char currentChar = currentPlayer.name().charAt(0);
 
-        int counter = 1;
-
         int currentPosition = start;
         int currentRow = lastMoveRow;
         int currentColumn = lastMoveColumn;
+
+        int counter = 1;
         while (true) {
             lastMoveColumn += 1;
             lastMoveRow += 1;
             start = lastMoveRow * gameConfig.getBoardColumn() + lastMoveColumn;
-            if (board.getBoardState().get(start) != null && board.getBoardState().get(start).equals(currentChar)) {
+            if ((lastMoveRow <= gameConfig.getBoardRow() && lastMoveColumn <= gameConfig.getBoardColumn()) && board.getBoardState().get(start) != null && board.getBoardState().get(start).equals(currentChar)) {
                 counter++;
             } else {
                 break;
@@ -38,7 +38,7 @@ public class DiagonalCondition implements VictoryCondition {
             currentColumn -= 1;
             currentRow -= 1;
             currentPosition = currentRow * gameConfig.getBoardColumn() + currentColumn;
-            if (board.getBoardState().get(currentPosition) != null && board.getBoardState().get(currentPosition).equals(currentChar)) {
+            if ((lastMoveRow >= 0 && lastMoveColumn > 0) && board.getBoardState().get(currentPosition) != null && board.getBoardState().get(currentPosition).equals(currentChar)) {
                 counter++;
             } else {
                 break;
@@ -61,6 +61,10 @@ public class DiagonalCondition implements VictoryCondition {
     }
 
     private int getLastMoveColumn(int lastMove, GameConfig gameConfig) {
-        return lastMove % gameConfig.getBoardColumn();
+        if (lastMove % gameConfig.getBoardColumn() == 0) {
+            return lastMove % gameConfig.getBoardColumn() + gameConfig.getBoardColumn();
+        } else {
+            return lastMove % gameConfig.getBoardColumn();
+        }
     }
 }
