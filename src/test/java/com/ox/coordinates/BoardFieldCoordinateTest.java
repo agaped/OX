@@ -3,7 +3,7 @@ package com.ox.coordinates;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class BoardFieldCoordinateTest {
 
@@ -11,7 +11,7 @@ public class BoardFieldCoordinateTest {
 
     @BeforeMethod
     public void setUp() {
-        bc=BoardFieldCoordinate.parse("4");
+        bc = BoardFieldCoordinate.parse("4");
     }
 
     @Test
@@ -19,6 +19,6 @@ public class BoardFieldCoordinateTest {
         //given and when
 
         //then
-        assertEquals(bc,new BoardFieldCoordinate(4));
+        assertEquals(bc, new BoardFieldCoordinate(4));
     }
 }

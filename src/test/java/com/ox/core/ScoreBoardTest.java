@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ScoreBoardTest {
 
@@ -14,28 +14,28 @@ public class ScoreBoardTest {
 
     @BeforeMethod
     public void setUp() {
-        scoreBoard=new ScoreBoard();
+        scoreBoard = new ScoreBoard();
     }
 
     @Test
     public void checkIfGivePointsCorrectlyToX() {
         //given and when
-        scoreBoard.givePoints(Player.X,3);
-        scoreBoard.givePoints(Player.X,3);
+        scoreBoard.givePoints(Player.X, 3);
+        scoreBoard.givePoints(Player.X, 3);
 
-        points=scoreBoard.getScores();
+        points = scoreBoard.getScores();
         //then
-        assertEquals(points.get(Player.X),new Integer(6));
+        assertEquals(points.get(Player.X), new Integer(6));
     }
 
     @Test
     public void checkIfGivePointsCorrectlyToO() {
         //given and when
-        scoreBoard.givePoints(Player.X,3);
-        scoreBoard.givePoints(Player.O,1);
+        scoreBoard.givePoints(Player.X, 3);
+        scoreBoard.givePoints(Player.O, 1);
 
-        points=scoreBoard.getScores();
+        points = scoreBoard.getScores();
         //then
-        assertEquals(points.get(Player.O),new Integer(1));
+        assertEquals(points.get(Player.O), new Integer(1));
     }
 }

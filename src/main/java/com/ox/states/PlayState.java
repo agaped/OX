@@ -1,8 +1,8 @@
 package com.ox.states;
 
-import com.ox.validators.PlayerMoveValidator;
-import com.ox.core.*;
 import com.ox.coordinates.BoardFieldCoordinate;
+import com.ox.core.*;
+import com.ox.validators.PlayerMoveValidator;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -39,17 +39,17 @@ public class PlayState implements GameState {
         }
 
         String input = userInputProvider.get();
-        if (!PlayerMoveValidator.validateInput(input,output)) {
+        if (!PlayerMoveValidator.validateInput(input, output)) {
             return this;
         }
 
-        if(!PlayerMoveValidator.validateMoveAccordingToBoardState(BoardFieldCoordinate.parse(input),board,output)){
+        if (!PlayerMoveValidator.validateMoveAccordingToBoardState(BoardFieldCoordinate.parse(input), board, output)) {
             return this;
-        }else {
+        } else {
             this.board.addMove(BoardFieldCoordinate.parse(input), currentPlayer);
         }
 
-        Optional<Player> optionalWinner = victoryChecker.isThereAWinner(BoardFieldCoordinate.parse(input),this.board,this.currentPlayer,this.gameConfig);
+        Optional<Player> optionalWinner = victoryChecker.isThereAWinner(BoardFieldCoordinate.parse(input), this.board, this.currentPlayer, this.gameConfig);
         if (optionalWinner.isPresent()) {
             return new VictoryState(optionalWinner.get(), scoreBoard);
         } else {

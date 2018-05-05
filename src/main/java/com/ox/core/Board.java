@@ -18,8 +18,8 @@ public class Board {
     public Board(GameConfig gameConfig) {
         this.boardState = new HashMap<>();
         this.gameConfig = gameConfig;
-        this.columns=gameConfig.getBoardColumn();
-        this.rows=gameConfig.getBoardRow();
+        this.columns = gameConfig.getBoardColumn();
+        this.rows = gameConfig.getBoardRow();
     }
 
     public void addMove(BoardFieldCoordinate boardFieldCoordinate, Player currentPlayer) {

@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class PlayerMoveValidatorTest {
 
@@ -24,21 +24,21 @@ public class PlayerMoveValidatorTest {
 
     @BeforeMethod
     public void setUp() {
-        output=System.out::println;
-        gameConfig=new GameConfig();
+        output = System.out::println;
+        gameConfig = new GameConfig();
         input = "4 3";
-        InputStream in=new ByteArrayInputStream(input.getBytes());
+        InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        gameConfig.setBoardSize(output,new Scanner(System.in)::nextLine,new GameConfigValidator());
-        board4x3 =new Board(gameConfig);
-        board4x3.addMove(new BoardFieldCoordinate(1),Player.X);
-        board4x3.addMove(new BoardFieldCoordinate(3),Player.X);
+        gameConfig.setBoardSize(output, new Scanner(System.in)::nextLine, new GameConfigValidator());
+        board4x3 = new Board(gameConfig);
+        board4x3.addMove(new BoardFieldCoordinate(1), Player.X);
+        board4x3.addMove(new BoardFieldCoordinate(3), Player.X);
     }
 
     @Test
     public void validateInput_whenInputMatchesRegex() {
         //given and when
-        input="23";
+        input = "23";
 
         //then
         assertEquals(PlayerMoveValidator.validateInput(input, output), true);
@@ -47,7 +47,7 @@ public class PlayerMoveValidatorTest {
     @Test
     public void validateInput_whenInputIsNegative() {
         //given and when
-        input="-23";
+        input = "-23";
 
         //then
         assertEquals(PlayerMoveValidator.validateInput(input, output), false);
@@ -56,7 +56,7 @@ public class PlayerMoveValidatorTest {
     @Test
     public void validateInput_whenInputContainsLetters() {
         //given and when
-        input="3s";
+        input = "3s";
 
         //then
         assertEquals(PlayerMoveValidator.validateInput(input, output), false);
@@ -65,7 +65,7 @@ public class PlayerMoveValidatorTest {
     @Test
     public void validateInput_whenInputIsEmpty() {
         //given and when
-        input="";
+        input = "";
 
         //then
         assertEquals(PlayerMoveValidator.validateInput(input, output), false);
@@ -74,7 +74,7 @@ public class PlayerMoveValidatorTest {
     @Test
     public void validateInput_whenInputIsNull() {
         //given and when
-        input=null;
+        input = null;
 
         //then
         assertEquals(PlayerMoveValidator.validateInput(input, output), false);
@@ -85,7 +85,7 @@ public class PlayerMoveValidatorTest {
         //given and when
 
         //then
-        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(4), board4x3,output),true);
+        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(4), board4x3, output), true);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class PlayerMoveValidatorTest {
         //given and when
 
         //then
-        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(3), board4x3,output),false);
+        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(3), board4x3, output), false);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class PlayerMoveValidatorTest {
         //given and when
 
         //then
-        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(24), board4x3,output),false);
+        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(24), board4x3, output), false);
     }
 
     @Test
@@ -109,6 +109,6 @@ public class PlayerMoveValidatorTest {
         //given and when
 
         //then
-        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(0), board4x3,output),false);
+        assertEquals(PlayerMoveValidator.validateMoveAccordingToBoardState(new BoardFieldCoordinate(0), board4x3, output), false);
     }
 }

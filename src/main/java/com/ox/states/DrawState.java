@@ -1,7 +1,10 @@
 package com.ox.states;
 
+import com.ox.core.GameConfig;
+import com.ox.core.Judge;
+import com.ox.core.Player;
+import com.ox.core.ScoreBoard;
 import com.ox.validators.GameConfigValidator;
-import com.ox.core.*;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -20,7 +23,7 @@ public class DrawState implements GameState {
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         output.accept("Draw!!!\n");
         scoreBoard.givePoints(player, Judge.DRAW.getPoints());
-        scoreBoard.givePoints(player.getOppositePlayer(),Judge.DRAW.getPoints());
+        scoreBoard.givePoints(player.getOppositePlayer(), Judge.DRAW.getPoints());
     }
 
     @Override

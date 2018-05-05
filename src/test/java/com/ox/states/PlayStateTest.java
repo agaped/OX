@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.util.Scanner;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class PlayStateTest {
 
@@ -21,20 +21,18 @@ public class PlayStateTest {
 
 
     @Test
-    public void checkIfMoveToTheNextStateWorksForPlayState_staysAtPlayState(){
+    public void checkIfMoveToTheNextStateWorksForPlayState_staysAtPlayState() {
         //given
-        GameState play=new PlayState(Player.X,new Board(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard());
+        GameState play = new PlayState(Player.X, new Board(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard());
 
         //when
-        play=play.moveToTheNextState(new Scanner(System.in)::nextLine,System.out::println);
+        play = play.moveToTheNextState(new Scanner(System.in)::nextLine, System.out::println);
 
 
         //then
         assertEquals(play.getClass(), new DrawState(new ScoreBoard(), Player.X).getClass());
 
     }
-
-
 
 
 }

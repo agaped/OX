@@ -1,9 +1,11 @@
 package com.ox.core;
 
-import com.ox.victorycondition.*;
 import com.ox.coordinates.BoardFieldCoordinate;
+import com.ox.victorycondition.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class VictoryChecker {
 

@@ -1,12 +1,12 @@
 package com.ox;
 
 import com.ox.core.GameConfig;
-import com.ox.validators.GameConfigValidator;
 import com.ox.core.ScoreBoard;
 import com.ox.core.TurnNumber;
 import com.ox.states.EndState;
 import com.ox.states.GameState;
 import com.ox.states.InitialState;
+import com.ox.validators.GameConfigValidator;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

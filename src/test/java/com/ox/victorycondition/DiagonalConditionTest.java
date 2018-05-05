@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import static com.ox.core.Player.X;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class DiagonalConditionTest {
 
@@ -27,53 +27,53 @@ public class DiagonalConditionTest {
 
     @BeforeMethod
     public void setUp() {
-        gameConfig=new GameConfig();
-        diagonalCondition =new DiagonalCondition();
-        gameConfigValidator=new GameConfigValidator();
+        gameConfig = new GameConfig();
+        diagonalCondition = new DiagonalCondition();
+        gameConfigValidator = new GameConfigValidator();
     }
 
     @Test
     public void isThereAVictory_PlayerXWins() {
 
         boardSize = "3 4";
-        inSize=new ByteArrayInputStream(boardSize.getBytes());
+        inSize = new ByteArrayInputStream(boardSize.getBytes());
         System.setIn(inSize);
-        gameConfig.setBoardSize(System.out::println,new Scanner(System.in)::nextLine, gameConfigValidator);
+        gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
         winCombination = "3";
-        inWin=new ByteArrayInputStream(winCombination.getBytes());
+        inWin = new ByteArrayInputStream(winCombination.getBytes());
         System.setIn(inWin);
-        gameConfig.setLengthOfCombinationToWin(System.out::println,new Scanner(System.in)::nextLine, gameConfigValidator);
+        gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
         Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(1),X);
-        board.addMove(new BoardFieldCoordinate(6),X);
-        board.addMove(new BoardFieldCoordinate(11),X);
+        board.addMove(new BoardFieldCoordinate(1), X);
+        board.addMove(new BoardFieldCoordinate(6), X);
+        board.addMove(new BoardFieldCoordinate(11), X);
 
-        assertEquals(Optional.of(X), diagonalCondition.isThereAVictory(new BoardFieldCoordinate(11),board,X,gameConfig) );
+        assertEquals(Optional.of(X), diagonalCondition.isThereAVictory(new BoardFieldCoordinate(11), board, X, gameConfig));
     }
 
     @Test
     public void isThereAVictory_CheckIfReturnsEmptyPlayer_IfNoVictoryInADiagonalFound() {
 
         boardSize = "3 5";
-        inSize=new ByteArrayInputStream(boardSize.getBytes());
+        inSize = new ByteArrayInputStream(boardSize.getBytes());
         System.setIn(inSize);
-        gameConfig.setBoardSize(System.out::println,new Scanner(System.in)::nextLine, gameConfigValidator);
+        gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
         winCombination = "3";
-        inWin=new ByteArrayInputStream(winCombination.getBytes());
+        inWin = new ByteArrayInputStream(winCombination.getBytes());
         System.setIn(inWin);
-        gameConfig.setLengthOfCombinationToWin(System.out::println,new Scanner(System.in)::nextLine, gameConfigValidator);
+        gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
         Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(1),X);
-        board.addMove(new BoardFieldCoordinate(3),X);
-        board.addMove(new BoardFieldCoordinate(9),X);
-        board.addMove(new BoardFieldCoordinate(10),X);
-        board.addMove(new BoardFieldCoordinate(7),X);
-        board.addMove(new BoardFieldCoordinate(13),X);
+        board.addMove(new BoardFieldCoordinate(1), X);
+        board.addMove(new BoardFieldCoordinate(3), X);
+        board.addMove(new BoardFieldCoordinate(9), X);
+        board.addMove(new BoardFieldCoordinate(10), X);
+        board.addMove(new BoardFieldCoordinate(7), X);
+        board.addMove(new BoardFieldCoordinate(13), X);
 
-        assertEquals(Optional.empty(), diagonalCondition.isThereAVictory(new BoardFieldCoordinate(6),board,X,gameConfig) );
+        assertEquals(Optional.empty(), diagonalCondition.isThereAVictory(new BoardFieldCoordinate(6), board, X, gameConfig));
     }
 }

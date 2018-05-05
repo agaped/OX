@@ -17,13 +17,13 @@ public class GameConfigValidator {
             input = userInput.get();
             if (input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
                 boardDimensionCoordinates = BoardDimensionCoordinates.parse(input);
-                if(boardDimensionCoordinates.getX()>=3 && boardDimensionCoordinates.getY()>=3) {
+                if (boardDimensionCoordinates.getX() >= 3 && boardDimensionCoordinates.getY() >= 3) {
                     if (boardDimensionCoordinates.getX() * boardDimensionCoordinates.getY() <= 10000) {
                         return Optional.of(input);
                     } else {
                         output.accept("Total size of the board cannot exceed 10 000. Try again");
                     }
-                }else{
+                } else {
                     output.accept("Minimal board size is: 3 3");
                 }
             } else {
@@ -39,11 +39,11 @@ public class GameConfigValidator {
             String input = userInput.get();
             if (input.matches("[1-9][0-9]*")) {
                 possibleCombination = Integer.parseInt(input);
-                if(possibleCombination>=3) {
+                if (possibleCombination >= 3) {
                     if (possibleCombination <= boardDimensionCoordinates.getX() || possibleCombination <= boardDimensionCoordinates.getY()) {
                         return Optional.of(input);
                     }
-                }else{
+                } else {
                     output.accept("Minimal length is 3");
                 }
             }

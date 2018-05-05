@@ -1,8 +1,8 @@
 package com.ox.victorycondition;
 
 import com.ox.coordinates.BoardFieldCoordinate;
-import com.ox.core.GameConfig;
 import com.ox.core.Board;
+import com.ox.core.GameConfig;
 import com.ox.core.Player;
 
 import java.util.Optional;
@@ -28,7 +28,7 @@ public class AntiDiagonalCondition implements VictoryCondition {
             lastMoveColumn += 1;
             lastMoveRow -= 1;
             start = lastMoveRow * gameConfig.getBoardColumn() + lastMoveColumn;
-            if ((lastMoveRow >= 0 && lastMoveColumn <=gameConfig.getBoardColumn()) && board.getBoardState().get(start) != null && board.getBoardState().get(start).equals(currentChar)) {
+            if ((lastMoveRow >= 0 && lastMoveColumn <= gameConfig.getBoardColumn()) && board.getBoardState().get(start) != null && board.getBoardState().get(start).equals(currentChar)) {
                 counter++;
             } else {
                 break;
@@ -38,7 +38,7 @@ public class AntiDiagonalCondition implements VictoryCondition {
             currentColumn -= 1;
             currentRow += 1;
             currentPosition = currentRow * gameConfig.getBoardColumn() + currentColumn;
-            if ((currentRow <=gameConfig.getBoardRow() && currentColumn > 0) && board.getBoardState().get(currentPosition) != null && board.getBoardState().get(currentPosition).equals(currentChar)) {
+            if ((currentRow <= gameConfig.getBoardRow() && currentColumn > 0) && board.getBoardState().get(currentPosition) != null && board.getBoardState().get(currentPosition).equals(currentChar)) {
                 counter++;
             } else {
                 break;
