@@ -1,6 +1,8 @@
 package com.ox.core;
 
 import com.ox.coordinates.BoardFieldCoordinate;
+import com.ox.language.Language;
+import com.ox.language.LanguageLoader;
 import com.ox.validators.GameConfigValidator;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,6 +21,9 @@ public class BoardTest {
     private Board boardFull;
     private Board board3x3;
     private GameConfig gameConfig;
+    String language="src\\main\\java\\com\\ox\\resources\\en";
+    Language lan=new Language();
+    LanguageLoader loader=new LanguageLoader(lan,language);
 
     @BeforeMethod
     public void setUp() {
@@ -30,6 +35,7 @@ public class BoardTest {
         gameConfig.setBoardSize(output, new Scanner(System.in)::nextLine, new GameConfigValidator());
         boardFull = new Board(gameConfig);
         board3x3 = new Board(gameConfig);
+        loader.load();
     }
 
     @Test

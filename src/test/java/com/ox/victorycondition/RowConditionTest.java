@@ -3,6 +3,8 @@ package com.ox.victorycondition;
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
 import com.ox.core.GameConfig;
+import com.ox.language.Language;
+import com.ox.language.LanguageLoader;
 import com.ox.validators.GameConfigValidator;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -25,12 +27,16 @@ public class RowConditionTest {
     private String winCombination;
     private InputStream inSize;
     private InputStream inWin;
+    String language="src\\main\\java\\com\\ox\\resources\\en";
+    Language lan=new Language();
+    LanguageLoader loader=new LanguageLoader(lan,language);
 
     @BeforeMethod
     public void setUp() {
         gameConfig = new GameConfig();
         rowCondition = new RowCondition();
         gameConfigValidator = new GameConfigValidator();
+        loader.load();
     }
 
     @Test

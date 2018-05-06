@@ -4,6 +4,8 @@ import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
 import com.ox.core.GameConfig;
 import com.ox.core.Player;
+import com.ox.language.Language;
+import com.ox.language.LanguageLoader;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -20,6 +22,9 @@ public class PlayerMoveValidatorTest {
     private String input;
     private Board board4x3;
     private GameConfig gameConfig;
+    String language="src\\main\\java\\com\\ox\\resources\\en";
+    Language lan=new Language();
+    LanguageLoader loader=new LanguageLoader(lan,language);
 
 
     @BeforeMethod
@@ -33,6 +38,7 @@ public class PlayerMoveValidatorTest {
         board4x3 = new Board(gameConfig);
         board4x3.addMove(new BoardFieldCoordinate(1), Player.X);
         board4x3.addMove(new BoardFieldCoordinate(3), Player.X);
+        loader.load();
     }
 
     @Test

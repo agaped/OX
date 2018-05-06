@@ -48,18 +48,18 @@ public class Game {
     }
 
     private void chooseLanguage() {
-        String language="src\\main\\java\\com\\ox\\resources\\"+validateLanguageChosenByPlayer();
-        Language lan=new Language();
-        LanguageLoader loader=new LanguageLoader(lan,language);
+        String language = "src\\main\\java\\com\\ox\\resources\\" + validateLanguageChosenByPlayer();
+        Language lan = new Language();
+        LanguageLoader loader = new LanguageLoader(lan, language);
         loader.load();
     }
 
     private String validateLanguageChosenByPlayer() {
         output.accept("Choose language: en/pl");
-        String input=userInputProvider.get();
-        while(!input.matches("(en|pl)")){
+        String input = userInputProvider.get();
+        while (!input.matches("(en|pl)")) {
             output.accept("Wrong input. Choose again");
-            input=userInputProvider.get();
+            input = userInputProvider.get();
         }
         return input;
     }
