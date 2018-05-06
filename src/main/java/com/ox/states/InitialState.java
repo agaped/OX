@@ -1,5 +1,6 @@
 package com.ox.states;
 
+import com.ox.language.Language;
 import com.ox.core.*;
 import com.ox.validators.GameConfigValidator;
 
@@ -26,10 +27,10 @@ public class InitialState implements GameState {
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
-        output.accept("Who shall start, X or O?");
+        output.accept(Language.get("initWhoStarts"));
         String userInput = userInputProvider.get();
         while (!userInput.matches("[XO]")) {
-            output.accept("Wrong character, choose X or O");
+            output.accept(Language.get("initWrongChar"));
             userInput = userInputProvider.get();
         }
         Player startingPlayer = Player.valueOf(userInput);

@@ -3,6 +3,8 @@ package com.ox;
 import com.ox.core.GameConfig;
 import com.ox.core.ScoreBoard;
 import com.ox.core.TurnNumber;
+import com.ox.language.Language;
+import com.ox.language.LanguageLoader;
 import com.ox.states.EndState;
 import com.ox.states.GameState;
 import com.ox.states.InitialState;
@@ -27,8 +29,11 @@ public class Game {
     }
 
     public void start() {
+        chooseLanguage();
         int turn = 1;
-        output.accept("Welcome to OX game!!!\nSome setup at the beginning...\n");
+
+        output.accept(Language.get("gameWelcome"));
+        output.accept(Language.get("gameSetup"));
         this.currentState = new InitialState(gameConfig, scoreBoard, new GameConfigValidator());
 
         while (turn <= TurnNumber.TURN_NUMBER.getMaxTurnNumberInOneGame()) {
@@ -40,6 +45,23 @@ public class Game {
 
         this.currentState = new EndState(scoreBoard);
         playGame();
+    }
+
+    private void chooseLanguage() {
+        String language="src\\main\\java\\com\\ox\\resources\\"+validateLanguageChosenByPlayer();
+        Language lan=new Language();
+        LanguageLoader loader=new LanguageLoader(lan,language);
+        loader.load();
+    }
+
+    private String validateLanguageChosenByPlayer() {
+        output.accept("Choose language: en/pl");
+        String input=userInputProvider.get();
+        while(!input.matches("(en|pl)")){
+            output.accept("Wrong input. Choose again");
+            input=userInputProvider.get();
+        }
+        return input;
     }
 
     private void playGame() {

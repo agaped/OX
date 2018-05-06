@@ -1,5 +1,6 @@
 package com.ox.validators;
 
+import com.ox.language.Language;
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
 
@@ -9,7 +10,7 @@ public class PlayerMoveValidator {
 
     public static boolean validateInput(String input, Consumer<String> output) {
         if (input == null || !input.matches("[1-9][0-9]*")) {
-            output.accept("Wrong input! Try again");
+            output.accept(Language.get("moveValidator"));
             return false;
         } else {
             return true;
@@ -23,11 +24,11 @@ public class PlayerMoveValidator {
             if (!board.getBoardState().containsKey(field)) {
                 return true;
             } else {
-                output.accept("Given field is occupied! Try again");
+                output.accept(Language.get("moveValidatorFieldOccupied"));
                 return false;
             }
         } else {
-            output.accept("Input is incorrect! Should not be greater than " + getMaxFieldsNumber(board));
+            output.accept(Language.get("moveValidatorOutOfBound")+" " + getMaxFieldsNumber(board));
             return false;
         }
     }

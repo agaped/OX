@@ -15,7 +15,7 @@ public class BoardDimensionCoordinatesTest {
     }
 
     @Test
-    public void checkIfParsesFirstCoordinate() {
+    public void checkIfParseFirstCoordinate() {
         //given and when
 
         //then
@@ -23,7 +23,7 @@ public class BoardDimensionCoordinatesTest {
     }
 
     @Test
-    public void checkIfParsesSecondCoordinate() {
+    public void checkIfParseSecondCoordinate() {
         //given and when
 
         //then

@@ -1,6 +1,7 @@
 package com.ox.states;
 
 import com.ox.Game;
+import com.ox.language.Language;
 import com.ox.core.GameConfig;
 import com.ox.core.Player;
 import com.ox.core.ScoreBoard;
@@ -20,23 +21,23 @@ public class EndState implements GameState {
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        output.accept("\nThanks for playing!\n\nStatistics:");
+        output.accept(Language.get("endThanks")+"\n\n"+Language.get("ensStat"));
         for (Player key : this.scoreBoard.getScores().keySet()) {
-            output.accept("Player " + key + " points: " + this.scoreBoard.getScores().get(key));
+            output.accept(Language.get("playPlayer") +" "+key + Language.get("endPoints") +" "+ this.scoreBoard.getScores().get(key));
         }
-        output.accept("\nDou you want to play again? y/n");
+        output.accept(Language.get("endAskToContinue"));
     }
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
         String input = userInputProvider.get();
-        if (input.equals("y")) {
+        if (input.equals("y")||input.equals("t")) {
             new Game(new Scanner(System.in)::nextLine, System.out::println, new GameConfig(), new ScoreBoard()).start();
             return null;
         } else if (input.equals("n")) {
             return null;
         } else {
-            output.accept("Unknown comment");
+            output.accept(Language.get("endUnknownComment"));
             return null;
         }
     }

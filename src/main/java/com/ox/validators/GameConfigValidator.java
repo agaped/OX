@@ -1,5 +1,6 @@
 package com.ox.validators;
 
+import com.ox.language.Language;
 import com.ox.coordinates.BoardDimensionCoordinates;
 
 import java.util.Optional;
@@ -13,7 +14,7 @@ public class GameConfigValidator {
     public Optional<String> validateBoardSize(Consumer<String> output, Supplier<String> userInput) {
         String input;
         while (true) {
-            output.accept("Provide board dimension - row and column, minimal board size is: 3 3");
+            output.accept(Language.get("boardSize"));
             input = userInput.get();
             if (input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
                 boardDimensionCoordinates = BoardDimensionCoordinates.parse(input);
@@ -21,13 +22,13 @@ public class GameConfigValidator {
                     if (boardDimensionCoordinates.getX() * boardDimensionCoordinates.getY() <= 10000) {
                         return Optional.of(input);
                     } else {
-                        output.accept("Total size of the board cannot exceed 10 000. Try again");
+                        output.accept(Language.get("boardSizeExceeded"));
                     }
                 } else {
-                    output.accept("Minimal board size is: 3 3");
+                    output.accept(Language.get("boardSizeMin"));
                 }
             } else {
-                output.accept("Wrong format! Try again");
+                output.accept(Language.get("boardWrongFormat"));
             }
         }
     }
@@ -35,7 +36,7 @@ public class GameConfigValidator {
     public Optional<String> validateLengthOfCombinationToWin(Consumer<String> output, Supplier<String> userInput) {
         int possibleCombination = 0;
         while (true) {
-            output.accept("Provide length of combination to win, minimal length is 3");
+            output.accept(Language.get("winCom"));
             String input = userInput.get();
             if (input.matches("[1-9][0-9]*")) {
                 possibleCombination = Integer.parseInt(input);
@@ -44,10 +45,10 @@ public class GameConfigValidator {
                         return Optional.of(input);
                     }
                 } else {
-                    output.accept("Minimal length is 3");
+                    output.accept(Language.get("winComMin"));
                 }
             }
-            output.accept("Impossible combination!!");
+            output.accept(Language.get("winComWrong"));
         }
     }
 }

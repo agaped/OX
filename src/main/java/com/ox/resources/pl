@@ -1,0 +1,23 @@
+gameWelcome:Witaj w grze kołko i krzyżyk!!!
+gameSetup:Na poczatek parę ustawień...
+boardSize:Podaj wymiary planszy - wiersze i kolumny, minimalny rozmiar to 3 3
+boardSizeExceeded:Rozmiar planszy nie może przekroczyć 10 000
+boardSizeMin:Najmniejszy możliwy rozmiar planszy wynosi 3x3
+boardWrongFormat:Zły format danych, spróbuj ponownie
+winCom:Podaj długość wygranej, najmniejszy rozmiar to 3
+winComMin:Najmniejszy rozmiar wynosi 3
+winComWrong:Niemożliwa kombinacja!!
+moveValidator:Złe dane! Spróbuj ponownie
+moveValidatorFieldOccupied:Pole jest juz zajęte! Spróbuj ponownie
+moveValidatorOutOfBound:Błędne dane, maksymalny rozmiar pola to
+initWhoStarts:Kto rozpoczyna grę, X czy O?
+initWrongChar:Niepoprawna litera, wybierz X lub O
+playPlayer:Gracz
+playMove:, Twój ruch
+draw:Remis!!!
+vic:Zwycięzcą jest
+endThanks:Dziękujemy za grę!
+ensStat:Podsumowanie
+endPoints: punktów
+endAskToContinue:Czy chcesz zagrać ponownie? t/n
+endUnknownComment:Nieznana komenda. Kończę grę...

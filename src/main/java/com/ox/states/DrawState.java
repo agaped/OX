@@ -1,5 +1,6 @@
 package com.ox.states;
 
+import com.ox.language.Language;
 import com.ox.core.GameConfig;
 import com.ox.core.Judge;
 import com.ox.core.Player;
@@ -21,7 +22,7 @@ public class DrawState implements GameState {
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        output.accept("Draw!!!\n");
+        output.accept(Language.get("draw")+"\n");
         scoreBoard.givePoints(player, Judge.DRAW.getPoints());
         scoreBoard.givePoints(player.getOppositePlayer(), Judge.DRAW.getPoints());
     }

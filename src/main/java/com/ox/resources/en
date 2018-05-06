@@ -1,0 +1,23 @@
+gameWelcome:Welcome to OX game!!!
+gameSetup:Some setup at the beginning...
+boardSize:Provide board dimension - row and column, minimal board size is: 3 3
+boardSizeExceeded:Total size of the board cannot exceed 10 000. Try again
+boardSizeMin:Minimal board size is: 3 3
+boardWrongFormat:Wrong format! Try again
+winCom:Provide length of combination to win, minimal length is 3
+winComMin:Minimal length is 3
+winComWrong:Impossible combination!!
+moveValidator:Wrong input! Try again
+moveValidatorFieldOccupied:Given field is occupied! Try again
+moveValidatorOutOfBound:Input is incorrect! Should not be greater than
+initWhoStarts:Who shall start, X or O?
+initWrongChar:Wrong character, choose X or O
+playPlayer:Player
+playMove:, make your move
+draw:Draw!!!
+vic:Winner is
+endThanks:Thanks for playing!
+ensStat:Statistics:
+endPoints: points:
+endAskToContinue:Dou you want to play again? y/n
+endUnknownComment:Unknown comment. Quitting the game...
