@@ -1,8 +1,8 @@
 gameWelcome:Welcome to OX game!!!
 gameSetup:Some setup at the beginning...
-boardSize:Provide board dimension - row and column, minimal board size is: 3 3
+boardSize:Provide board dimension - row and column, minimal board size is 3 3
 boardSizeExceeded:Total size of the board cannot exceed 10 000. Try again
-boardSizeMin:Minimal board size is: 3 3
+boardSizeMin:Minimal board size is 3 3
 boardWrongFormat:Wrong format! Try again
 winCom:Provide length of combination to win, minimal length is 3
 winComMin:Minimal length is 3

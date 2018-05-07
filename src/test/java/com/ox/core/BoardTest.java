@@ -21,7 +21,7 @@ public class BoardTest {
     private Board boardFull;
     private Board board3x3;
     private GameConfig gameConfig;
-    String language="src\\main\\java\\com\\ox\\resources\\en";
+    String language="src/main/java/com/ox/resources/en";
     Language lan=new Language();
     LanguageLoader loader=new LanguageLoader(lan,language);
 

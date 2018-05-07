@@ -3,10 +3,7 @@ package com.ox;
 import com.ox.core.GameConfig;
 import com.ox.core.ScoreBoard;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Scanner;
 import java.util.function.Supplier;
 

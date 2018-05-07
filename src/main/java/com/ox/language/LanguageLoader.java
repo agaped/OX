@@ -11,16 +11,17 @@ public class LanguageLoader {
     private Language language;
     private File file;
     private String path;
+    private Scanner fileReader;
 
     public LanguageLoader(Language language, String fileName) {
         this.language = language;
         this.file = new File(fileName);
-        this.path=file.getAbsolutePath();
+        //this.path=file.getAbsolutePath();
     }
 
     public void load(){
         try {
-            Scanner fileReader = new Scanner(file);
+            this.fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 String[] parts = line.split(":");
@@ -28,6 +29,8 @@ public class LanguageLoader {
             }
         } catch (FileNotFoundException e) {
             System.err.print("Problem with loading the language file");
+        }finally{
+            this.fileReader.close();
         }
     }
 }

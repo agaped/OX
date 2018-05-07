@@ -18,7 +18,7 @@ public class GameConfigValidatorTest {
     private String input;
     private GameConfigValidator gameConfigValidator;
     private Consumer<String> output;
-    String language="src\\main\\java\\com\\ox\\resources\\en";
+    String language="src/main/java/com/ox/resources/en";
     Language lan=new Language();
     LanguageLoader loader=new LanguageLoader(lan,language);
 

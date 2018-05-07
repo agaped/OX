@@ -25,6 +25,7 @@ public class EndState implements GameState {
         for (Player key : this.scoreBoard.getScores().keySet()) {
             output.accept(Language.get("playPlayer") +" "+key + Language.get("endPoints") +" "+ this.scoreBoard.getScores().get(key));
         }
+        output.accept("");
         output.accept(Language.get("endAskToContinue"));
     }
 

@@ -27,7 +27,7 @@ public class ColumnConditionTest {
     private String winCombination;
     private InputStream inSize;
     private InputStream inWin;
-    String language="src\\main\\java\\com\\ox\\resources\\en";
+    String language="src/main/java/com/ox/resources/en";
     Language lan=new Language();
     LanguageLoader loader=new LanguageLoader(lan,language);
 
