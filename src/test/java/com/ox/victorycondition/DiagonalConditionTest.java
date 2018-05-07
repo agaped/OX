@@ -26,7 +26,7 @@ public class DiagonalConditionTest {
     private String winCombination;
     private InputStream inSize;
     private InputStream inWin;
-    String language="src/main/java/com/ox/resources/en";
+    String language="en";
     Language lan=new Language();
     LanguageLoader loader=new LanguageLoader(lan,language);
 

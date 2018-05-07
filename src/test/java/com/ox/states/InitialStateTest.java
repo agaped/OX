@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 
 public class InitialStateTest {
 
-    String language = "src/main/java/com/ox/resources/en";
+    String language = "en";
     Language lan = new Language();
     LanguageLoader loader = new LanguageLoader(lan, language);
 

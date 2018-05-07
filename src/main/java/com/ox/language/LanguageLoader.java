@@ -1,32 +1,36 @@
 package com.ox.language;
 
+import com.ox.Main;
+
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class LanguageLoader {
 
     private Language language;
-    private File file;
-    private Scanner fileReader;
+    private String fileName;
 
     public LanguageLoader(Language language, String fileName) {
-        this.language = language;
-        this.file = new File(fileName);
+        this.language=language;
+        this.fileName = fileName;
     }
 
     public void load() {
         try {
-            this.fileReader = new Scanner(file);
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                String[] parts = line.split(":");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream(fileName)));
+            String thisLine;
+            while ((thisLine = bufferedReader.readLine()) != null) {
+                String[] parts = thisLine.split(":");
                 this.language.add(parts[0], parts[1]);
             }
-        } catch (FileNotFoundException e) {
-            System.err.print("Problem with loading the language file");
-        } finally {
-            this.fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
+
+
     }
 }
