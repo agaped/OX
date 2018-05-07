@@ -1,8 +1,8 @@
 package com.ox.states;
 
-import com.ox.language.Language;
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.*;
+import com.ox.language.Language;
 import com.ox.validators.PlayerMoveValidator;
 
 import java.util.Optional;
@@ -30,7 +30,7 @@ public class PlayState implements GameState {
         output.accept("");
         this.board.printBoardState(output);
         if (!this.board.isBoardFull())
-            output.accept(Language.get("playPlayer")+" "+ currentPlayer + Language.get("playMove"));
+            output.accept(Language.get("playPlayer") + " " + currentPlayer + Language.get("playMove"));
     }
 
     @Override

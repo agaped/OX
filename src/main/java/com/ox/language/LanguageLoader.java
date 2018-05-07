@@ -1,7 +1,5 @@
 package com.ox.language;
 
-import com.ox.language.Language;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -10,16 +8,14 @@ public class LanguageLoader {
 
     private Language language;
     private File file;
-    private String path;
     private Scanner fileReader;
 
     public LanguageLoader(Language language, String fileName) {
         this.language = language;
         this.file = new File(fileName);
-        //this.path=file.getAbsolutePath();
     }
 
-    public void load(){
+    public void load() {
         try {
             this.fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
@@ -29,7 +25,7 @@ public class LanguageLoader {
             }
         } catch (FileNotFoundException e) {
             System.err.print("Problem with loading the language file");
-        }finally{
+        } finally {
             this.fileReader.close();
         }
     }

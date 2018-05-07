@@ -1,8 +1,8 @@
 package com.ox.validators;
 
-import com.ox.language.Language;
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
+import com.ox.language.Language;
 
 import java.util.function.Consumer;
 
@@ -28,7 +28,7 @@ public class PlayerMoveValidator {
                 return false;
             }
         } else {
-            output.accept(Language.get("moveValidatorOutOfBound")+" " + getMaxFieldsNumber(board));
+            output.accept(Language.get("moveValidatorOutOfBound") + " " + getMaxFieldsNumber(board));
             return false;
         }
     }

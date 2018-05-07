@@ -1,7 +1,7 @@
 package com.ox.states;
 
-import com.ox.language.Language;
 import com.ox.core.*;
+import com.ox.language.Language;
 import com.ox.validators.GameConfigValidator;
 
 import java.util.function.Consumer;

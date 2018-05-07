@@ -1,7 +1,7 @@
 package com.ox.validators;
 
-import com.ox.language.Language;
 import com.ox.coordinates.BoardDimensionCoordinates;
+import com.ox.language.Language;
 
 import java.util.Optional;
 import java.util.function.Consumer;

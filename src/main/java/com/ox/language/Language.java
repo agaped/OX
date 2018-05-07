@@ -11,11 +11,11 @@ public class Language {
         this.language = new HashMap<>();
     }
 
-    public void add(String shortage, String message){
+    public void add(String shortage, String message) {
         this.language.put(shortage, message);
     }
 
-    public static String get(String shortage){
+    public static String get(String shortage) {
         return language.get(shortage);
     }
 
