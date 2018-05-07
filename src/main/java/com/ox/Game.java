@@ -48,7 +48,7 @@ public class Game {
     }
 
     private void chooseLanguage() {
-        String language = "src/main/java/com/ox/resources/" + validateLanguageChosenByPlayer();
+        String language = validateLanguageChosenByPlayer();
         Language lan = new Language();
         LanguageLoader loader = new LanguageLoader(lan, language);
         loader.load();

@@ -22,7 +22,7 @@ public class PlayerMoveValidatorTest {
     private String input;
     private Board board4x3;
     private GameConfig gameConfig;
-    String language="src/main/java/com/ox/resources/en";
+    String language="en";
     Language lan=new Language();
     LanguageLoader loader=new LanguageLoader(lan,language);
 
