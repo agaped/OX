@@ -23,4 +23,8 @@ public class ScoreBoard {
     public Map<Player, Integer> getScores() {
         return Collections.unmodifiableMap(this.points);
     }
+
+    public Integer getPlayerScores(Player player) {
+        return this.points.get(player);
+    }
 }

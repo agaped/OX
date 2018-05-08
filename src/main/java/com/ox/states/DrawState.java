@@ -22,9 +22,9 @@ public class DrawState implements GameState {
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        output.accept(Language.get("draw") + "\n");
         scoreBoard.givePoints(player, Judge.DRAW.getPoints());
         scoreBoard.givePoints(player.getOppositePlayer(), Judge.DRAW.getPoints());
+        output.accept(Language.get("draw") +" "+player+":"+scoreBoard.getPlayerScores(player)+" ,"+player.getOppositePlayer()+":"+scoreBoard.getPlayerScores(player.getOppositePlayer())+ "\n");
     }
 
     @Override

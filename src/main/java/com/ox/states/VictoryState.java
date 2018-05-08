@@ -23,9 +23,9 @@ public class VictoryState implements GameState {
 
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
-        output.accept(Language.get("vic") + " " + winner + "\n");
         scoreBoard.givePoints(winner, Judge.WINNER.getPoints());
         scoreBoard.givePoints(winner.getOppositePlayer(), Judge.DEFEAT.getPoints());
+        output.accept(Language.get("vic") + " " + winner+". "+winner+":"+scoreBoard.getPlayerScores(winner)+" ,"+winner.getOppositePlayer()+":"+scoreBoard.getPlayerScores(winner.getOppositePlayer())+"\n");
     }
 
     @Override

@@ -19,5 +19,5 @@ vic:Winner is
 endThanks:Thanks for playing!
 ensStat:Statistics:
 endPoints: points:
-endAskToContinue:Dou you want to play again? y/n
+endAskToContinue:Do you want to play again? y/n
 endUnknownComment:Unknown comment. Quitting the game...
