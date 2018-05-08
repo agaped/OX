@@ -42,4 +42,14 @@ public class GameConfig {
     public int getLengthOfCombinationToWin() {
         return lengthOfCombinationToWin;
     }
+
+    public void setDefaultBoardSize(){
+        boardDimensionCoordinates = BoardDimensionCoordinates.parse("3 3");
+        this.boardRow = boardDimensionCoordinates.getX();
+        this.boardColumn = boardDimensionCoordinates.getY();
+    }
+
+    public void setDefaultLengthOfCombinationToWin(){
+        this.lengthOfCombinationToWin = Integer.parseInt("3");
+    }
 }

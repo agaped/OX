@@ -31,6 +31,6 @@ public class InitialStateTest {
         init = init.moveToTheNextState(new Scanner(System.in)::nextLine, System.out::println);
 
         //then
-        assertEquals(init.getClass(), new PlayState(Player.X, new Board(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard()).getClass());
+        assertEquals(init.getClass(), new PlayState(Player.X,Player.X, new Board(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard()).getClass());
     }
 }

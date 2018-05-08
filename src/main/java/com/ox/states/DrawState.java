@@ -1,11 +1,7 @@
 package com.ox.states;
 
-import com.ox.core.GameConfig;
-import com.ox.core.Judge;
-import com.ox.core.Player;
-import com.ox.core.ScoreBoard;
+import com.ox.core.*;
 import com.ox.language.Language;
-import com.ox.validators.GameConfigValidator;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -14,10 +10,14 @@ public class DrawState implements GameState {
 
     private ScoreBoard scoreBoard;
     private Player player;
+    private Player nextPlayer;
+    private GameConfig gameConfig;
 
-    public DrawState(ScoreBoard scoreBoard, Player player) {
+    public DrawState(ScoreBoard scoreBoard, Player player, Player nextPlayer, GameConfig gameConfig) {
         this.scoreBoard = scoreBoard;
         this.player = player;
+        this.nextPlayer = nextPlayer;
+        this.gameConfig = gameConfig;
     }
 
     @Override
@@ -29,6 +29,7 @@ public class DrawState implements GameState {
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
-        return new InitialState(new GameConfig(), scoreBoard, new GameConfigValidator());
+//        return new InitialState(new GameConfig(), scoreBoard, new GameConfigValidator());
+        return new PlayState(nextPlayer, nextPlayer.getOppositePlayer(), new Board(gameConfig), new VictoryChecker(), gameConfig, scoreBoard);
     }
 }

@@ -12,7 +12,7 @@ public class ColumnCondition implements VictoryCondition {
     @Override
     public Optional<Player> isThereAVictory(BoardFieldCoordinate lastMove, Board board, Player currentPlayer, GameConfig gameConfig) {
 
-        int lastMoveColumn = getLastMoveColumn(lastMove, gameConfig);
+        int lastMoveColumn = getLastMoveColumn(lastMove.getX(), gameConfig);
         int winCondition = gameConfig.getLengthOfCombinationToWin();
         char currentChar = currentPlayer.name().charAt(0);
 
@@ -42,7 +42,11 @@ public class ColumnCondition implements VictoryCondition {
         }
     }
 
-    private int getLastMoveColumn(BoardFieldCoordinate lastMove, GameConfig gameConfig) {
-        return lastMove.getX() % gameConfig.getBoardColumn();
+    private int getLastMoveColumn(int lastMove, GameConfig gameConfig) {
+        if (lastMove % gameConfig.getBoardColumn() == 0) {
+            return lastMove % gameConfig.getBoardColumn() + gameConfig.getBoardColumn();
+        } else {
+            return lastMove % gameConfig.getBoardColumn();
+        }
     }
 }

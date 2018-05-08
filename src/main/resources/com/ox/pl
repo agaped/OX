@@ -1,5 +1,5 @@
 gameWelcome:Witaj w grze kołko i krzyżyk!!!
-gameSetup:Na poczatek parę ustawień...
+gameSetup:Czy chcesz zmienic domyślne ustawienia? t/n
 boardSize:Podaj wymiary planszy - wiersze i kolumny, minimalny rozmiar to 3 3
 boardSizeExceeded:Rozmiar planszy nie może przekroczyć 10 000
 boardSizeMin:Najmniejszy możliwy rozmiar planszy wynosi 3x3
