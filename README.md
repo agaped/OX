@@ -2,8 +2,15 @@
  
 A console game based on a simple state machine
 
-To run it:
+To play it:
 
 >mvn clean install 
 
->java -jar /target/name.jar
+>java -jar /target/name.jar 
+
+To run it with given paramethers:
+
+>mvn clean install 
+
+>bash run.sh
+
