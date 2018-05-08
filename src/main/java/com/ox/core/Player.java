@@ -1,6 +1,6 @@
 package com.ox.core;
 
-public enum Player {
+public enum Player{
     X {
         @Override
         public Player getOppositePlayer() {
