@@ -23,7 +23,7 @@ public class EndState implements GameState {
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         output.accept(Language.get("endThanks") + "\n\n" + Language.get("ensStat"));
         for (Player key : this.scoreBoard.getScores().keySet()) {
-            output.accept(Language.get("playPlayer") + " " + key + Language.get("endPoints") + " " + this.scoreBoard.getPlayerScores(key));
+            output.accept(Language.get("playPlayer") + " " + key.getPlayerName()+" - "+key+" " + Language.get("endPoints") + " " + this.scoreBoard.getPlayerScores(key));
         }
         output.accept("");
         output.accept(Language.get("endAskToContinue"));

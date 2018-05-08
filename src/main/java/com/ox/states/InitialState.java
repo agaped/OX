@@ -27,31 +27,56 @@ public class InitialState implements GameState {
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         output.accept("Do you want to change default settings? y/n");
-        String setup=userInputProvider.get();
-        if(setup.equals("n")){
+        String setup = userInputProvider.get();
+        setup = validateDefaultSetup(output, userInputProvider, setup);
+        if (setup.equals("n")) {
             lan = new Language();
             loader = new LanguageLoader(lan, "en");
             loader.load();
             gameConfig.setDefaultBoardSize();
             gameConfig.setDefaultLengthOfCombinationToWin();
-            startingPlayer=Player.valueOf("X");
-            WhoGoesNext whoGoesNext=new WhoGoesNext(startingPlayer);
-            nextPlayer=whoGoesNext.getNextPlayer();
+            startingPlayer = Player.valueOf("X");
+            startingPlayer.setPlayerName("X");
+            startingPlayer.getOppositePlayer().setPlayerName("O");
+            returnNextPlayer();
 
-        }else{
-            chooseLanguage(output,userInputProvider);
+        } else {
+            chooseLanguage(output, userInputProvider);
             gameConfig.setBoardSize(output, userInputProvider, gameConfigValidator);
             gameConfig.setLengthOfCombinationToWin(output, userInputProvider, gameConfigValidator);
+
+            output.accept(Language.get("setPlayerNameForX"));
+            Player.X.setPlayerName(userInputProvider.get());
+            output.accept(Language.get("setPlayerNameForO"));
+            Player.O.setPlayerName(userInputProvider.get());
+
             output.accept(Language.get("initWhoStarts"));
             String userInput = userInputProvider.get();
-            while (!userInput.matches("[XO]")) {
-                output.accept(Language.get("initWrongChar"));
-                userInput = userInputProvider.get();
-            }
+            userInput = validateGivenSign(output, userInputProvider, userInput);
             startingPlayer = Player.valueOf(userInput);
-            WhoGoesNext whoGoesNext=new WhoGoesNext(startingPlayer);
-            nextPlayer=whoGoesNext.getNextPlayer();
+            returnNextPlayer();
         }
+    }
+
+    private String validateGivenSign(Consumer<String> output, Supplier<String> userInputProvider, String userInput) {
+        while (!userInput.matches("[XO]")) {
+            output.accept(Language.get("initWrongChar"));
+            userInput = userInputProvider.get();
+        }
+        return userInput;
+    }
+
+    private String validateDefaultSetup(Consumer<String> output, Supplier<String> userInputProvider, String setup) {
+        while (!setup.matches("[y|n]")) {
+            output.accept("Do you want to change default settings? y/n");
+            setup = userInputProvider.get();
+        }
+        return setup;
+    }
+
+    private void returnNextPlayer() {
+        WhoGoesNext whoGoesNext = new WhoGoesNext(startingPlayer);
+        nextPlayer = whoGoesNext.getNextPlayer();
     }
 
     @Override

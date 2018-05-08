@@ -30,7 +30,7 @@ public class PlayState implements GameState {
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         if (!this.board.isBoardFull()) {
-            output.accept(Language.get("playPlayer") + " " + currentPlayer + Language.get("playMove"));
+            output.accept(Language.get("playPlayer") + " " + currentPlayer.getPlayerName() + Language.get("playMove"));
         }
         this.board.printBoardState(output);
     }

@@ -1,5 +1,7 @@
 gameWelcome:Welcome to OX game!!!
 gameSetup:Do you want to change default settings? y/n
+setPlayerNameForX:Provide name for player X:
+setPlayerNameForO:Provide name for player O:
 boardSize:Provide board dimension - row and column, minimal board size is 3 3
 boardSizeExceeded:Total size of the board cannot exceed 10 000. Try again
 boardSizeMin:Minimal board size is 3 3

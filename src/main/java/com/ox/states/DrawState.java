@@ -29,7 +29,6 @@ public class DrawState implements GameState {
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
-//        return new InitialState(new GameConfig(), scoreBoard, new GameConfigValidator());
         return new PlayState(nextPlayer, nextPlayer.getOppositePlayer(), new Board(gameConfig), new VictoryChecker(), gameConfig, scoreBoard);
     }
 }

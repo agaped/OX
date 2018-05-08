@@ -14,4 +14,14 @@ public enum Player{
     };
 
     public abstract Player getOppositePlayer();
+
+    private String playerName;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }
