@@ -1,6 +1,6 @@
 package com.ox.core;
 
-public enum Player {
+public enum Player{
     X {
         @Override
         public Player getOppositePlayer() {
@@ -14,4 +14,14 @@ public enum Player {
     };
 
     public abstract Player getOppositePlayer();
+
+    private String playerName;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }

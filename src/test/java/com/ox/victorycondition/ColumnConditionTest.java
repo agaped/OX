@@ -2,11 +2,14 @@ package com.ox.victorycondition;
 
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
+import com.ox.core.BoardPrinter;
 import com.ox.core.GameConfig;
+import com.ox.core.Player;
 import com.ox.language.Language;
 import com.ox.language.LanguageLoader;
 import com.ox.validators.GameConfigValidator;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
@@ -27,9 +30,11 @@ public class ColumnConditionTest {
     private String winCombination;
     private InputStream inSize;
     private InputStream inWin;
-    String language="en";
-    Language lan=new Language();
-    LanguageLoader loader=new LanguageLoader(lan,language);
+    String language = "en";
+    Language lan = new Language();
+    LanguageLoader loader = new LanguageLoader(lan, language);
+    private static Board board;
+    private BoardPrinter boardPrinter;
 
     @BeforeMethod
     public void setUp() {
@@ -37,33 +42,8 @@ public class ColumnConditionTest {
         columnCondition = new ColumnCondition();
         gameConfigValidator = new GameConfigValidator();
         loader.load();
-    }
 
-    @Test
-    public void isThereAVictory_PlayerXWins_GivenFieldsAreInFirstColumn() {
-
-        boardSize = "3 3";
-        inSize = new ByteArrayInputStream(boardSize.getBytes());
-        System.setIn(inSize);
-        gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
-
-        winCombination = "3";
-        inWin = new ByteArrayInputStream(winCombination.getBytes());
-        System.setIn(inWin);
-        gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
-
-        Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(1), X);
-        board.addMove(new BoardFieldCoordinate(4), X);
-        board.addMove(new BoardFieldCoordinate(7), X);
-
-        assertEquals(Optional.of(X), columnCondition.isThereAVictory(new BoardFieldCoordinate(7), board, X, gameConfig));
-    }
-
-    @Test
-    public void isThereAVictory_PlayerXWins_GivenFieldsAreInMiddleColumn() {
-
-        boardSize = "5 5";
+        boardSize = "4 6";
         inSize = new ByteArrayInputStream(boardSize.getBytes());
         System.setIn(inSize);
         gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
@@ -73,34 +53,55 @@ public class ColumnConditionTest {
         System.setIn(inWin);
         gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
-        Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(3), X);
-        board.addMove(new BoardFieldCoordinate(13), X);
-        board.addMove(new BoardFieldCoordinate(8), X);
-        board.addMove(new BoardFieldCoordinate(18), X);
-
-        assertEquals(Optional.of(X), columnCondition.isThereAVictory(new BoardFieldCoordinate(18), board, X, gameConfig));
+        board = new Board(gameConfig);
+        boardPrinter = new BoardPrinter(board);
     }
 
-    @Test
-    public void isThereAVictory_CheckIfReturnsEmptyPlayer_IfNoVictoryInAColumnFound() {
+    private static void fillBoard(Player player, int... coordinates) {
+        for (int coordinate : coordinates) {
+            board.addMove(new BoardFieldCoordinate(coordinate), player);
+        }
+    }
 
-        boardSize = "3 3";
-        inSize = new ByteArrayInputStream(boardSize.getBytes());
-        System.setIn(inSize);
-        gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
+    @DataProvider(name = "victoryInAColumn")
+    public static Object[][] victoryInAColumn() {
 
-        winCombination = "3";
-        inWin = new ByteArrayInputStream(winCombination.getBytes());
-        System.setIn(inWin);
-        gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
+        return new Object[][]{{1, 7, 13, 19}, {2, 8, 14, 20}, {3, 9, 15, 21}, {4, 10, 16, 22}, {5, 11, 17, 23}, {6, 12, 18, 24}};
 
-        Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(1), X);
-        board.addMove(new BoardFieldCoordinate(5), X);
-        board.addMove(new BoardFieldCoordinate(10), X);
-        board.addMove(new BoardFieldCoordinate(15), O);
+    }
 
-        assertEquals(Optional.empty(), columnCondition.isThereAVictory(new BoardFieldCoordinate(15), board, O, gameConfig));
+    @DataProvider(name = "noVictory")
+    public static Object[][] noVictory() {
+
+        return new Object[][]{{1, 8, 13, 19}, {1, 8, 14, 20}, {1, 2, 15, 21}, {17, 24, 16, 22}, {5, 11, 18, 23}, {1, 2, 3, 4}};
+
+    }
+
+    @Test(dataProvider = "victoryInAColumn")
+    public void isThereAVictory_LastSignPutOnTheEdge(int first, int second, int third, int fourth) {
+        //given and when
+        fillBoard(Player.X, first, second, third, fourth);
+        boardPrinter.printBoardState(System.out::println);
+        //then
+        assertEquals(columnCondition.isThereAVictory(new BoardFieldCoordinate(first), board, X, gameConfig), Optional.of(X));
+    }
+
+    @Test(dataProvider = "victoryInAColumn")
+    public void isThereAVictory_LastSignPutInTheMiddle(int first, int second, int third, int fourth) {
+        //given and when
+        fillBoard(Player.X, first, second, third, fourth);
+        boardPrinter.printBoardState(System.out::println);
+        //then
+        assertEquals(columnCondition.isThereAVictory(new BoardFieldCoordinate(second), board, X, gameConfig), Optional.of(X));
+    }
+
+
+    @Test(dataProvider = "noVictory")
+    public void isThereAVictory_NoVictoryInAColumn(int first, int second, int third, int fourth) {
+        //given and when
+        fillBoard(Player.X, first, second, third, fourth);
+        boardPrinter.printBoardState(System.out::println);
+        //then
+        assertEquals(columnCondition.isThereAVictory(new BoardFieldCoordinate(first), board, O, gameConfig), Optional.empty());
     }
 }

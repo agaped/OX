@@ -2,11 +2,14 @@ package com.ox.victorycondition;
 
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
+import com.ox.core.BoardPrinter;
 import com.ox.core.GameConfig;
+import com.ox.core.Player;
 import com.ox.language.Language;
 import com.ox.language.LanguageLoader;
 import com.ox.validators.GameConfigValidator;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
@@ -14,7 +17,6 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static com.ox.core.Player.O;
 import static com.ox.core.Player.X;
 import static org.testng.Assert.assertEquals;
 
@@ -27,9 +29,11 @@ public class RowConditionTest {
     private String winCombination;
     private InputStream inSize;
     private InputStream inWin;
-    String language="en";
-    Language lan=new Language();
-    LanguageLoader loader=new LanguageLoader(lan,language);
+    String language = "en";
+    Language lan = new Language();
+    LanguageLoader loader = new LanguageLoader(lan, language);
+    private static Board board;
+    private BoardPrinter boardPrinter;
 
     @BeforeMethod
     public void setUp() {
@@ -37,69 +41,65 @@ public class RowConditionTest {
         rowCondition = new RowCondition();
         gameConfigValidator = new GameConfigValidator();
         loader.load();
-    }
 
-    @Test
-    public void isThereAVictory_PlayerXWins_GivenFieldsAreInARow() {
-
-        boardSize = "3 3";
+        boardSize = "4 8";
         inSize = new ByteArrayInputStream(boardSize.getBytes());
         System.setIn(inSize);
         gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
-        winCombination = "3";
+        winCombination = "4";
         inWin = new ByteArrayInputStream(winCombination.getBytes());
         System.setIn(inWin);
         gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
-        Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(1), X);
-        board.addMove(new BoardFieldCoordinate(2), X);
-        board.addMove(new BoardFieldCoordinate(3), X);
-
-        assertEquals(Optional.of(X), rowCondition.isThereAVictory(new BoardFieldCoordinate(2), board, X, gameConfig));
+        board = new Board(gameConfig);
+        boardPrinter = new BoardPrinter(board);
     }
 
-    @Test
-    public void isThereAVictory_PlayerXWins_GivenFieldsNotInARow() {
-
-        boardSize = "3 4";
-        inSize = new ByteArrayInputStream(boardSize.getBytes());
-        System.setIn(inSize);
-        gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
-
-        winCombination = "3";
-        inWin = new ByteArrayInputStream(winCombination.getBytes());
-        System.setIn(inWin);
-        gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
-
-        Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(5), X);
-        board.addMove(new BoardFieldCoordinate(7), X);
-        board.addMove(new BoardFieldCoordinate(6), X);
-
-        assertEquals(Optional.of(X), rowCondition.isThereAVictory(new BoardFieldCoordinate(6), board, X, gameConfig));
+    private static void fillBoard(Player player, int... coordinates) {
+        for (int coordinate : coordinates) {
+            board.addMove(new BoardFieldCoordinate(coordinate), player);
+        }
     }
 
-    @Test
-    public void isThereAVictory_CheckIfReturnsEmptyPlayer_IfNoVictoryInARowFound() {
+    @DataProvider(name = "victory")
+    public static Object[][] victoryInARow() {
 
-        boardSize = "3 4";
-        inSize = new ByteArrayInputStream(boardSize.getBytes());
-        System.setIn(inSize);
-        gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
+        return new Object[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {10, 11, 12, 13}, {20, 21, 22, 23}, {21, 22, 23, 24}, {29, 30, 31, 32}};
 
-        winCombination = "3";
-        inWin = new ByteArrayInputStream(winCombination.getBytes());
-        System.setIn(inWin);
-        gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
+    }
 
-        Board board = new Board(gameConfig);
-        board.addMove(new BoardFieldCoordinate(1), X);
-        board.addMove(new BoardFieldCoordinate(2), O);
-        board.addMove(new BoardFieldCoordinate(3), X);
-        board.addMove(new BoardFieldCoordinate(5), X);
+    @DataProvider(name = "noVictory")
+    public static Object[][] noVictory() {
 
-        assertEquals(Optional.empty(), rowCondition.isThereAVictory(new BoardFieldCoordinate(5), board, X, gameConfig));
+        return new Object[][]{{1, 3, 2, 10}, {4, 12, 20, 28}, {8, 16, 24, 32}};
+
+    }
+
+    @Test(dataProvider = "victory")
+    public void isThereAVictory_LastSignPutOnTheEdge(int first, int second, int third, int fourth) {
+        //given and when
+        fillBoard(Player.X, first, second, third, fourth);
+        boardPrinter.printBoardState(System.out::println);
+        //then
+        assertEquals(rowCondition.isThereAVictory(new BoardFieldCoordinate(first), board, X, gameConfig), Optional.of(X));
+    }
+
+    @Test(dataProvider = "victory")
+    public void isThereAVictory_LastSignPutInTheMiddle(int first, int second, int third, int fourth) {
+        //given and when
+        fillBoard(Player.X, first, second, third, fourth);
+        boardPrinter.printBoardState(System.out::println);
+        //then
+        assertEquals(rowCondition.isThereAVictory(new BoardFieldCoordinate(third), board, X, gameConfig), Optional.of(X));
+    }
+
+    @Test(dataProvider = "noVictory")
+    public void isThereAVictory_CheckIfReturnsEmptyPlayer_IfNoVictoryInARowFound(int first, int second, int third, int fourth) {
+        //given and when
+        fillBoard(Player.O, first, second, third, fourth);
+        boardPrinter.printBoardState(System.out::println);
+        //then
+        assertEquals(rowCondition.isThereAVictory(new BoardFieldCoordinate(fourth), board, X, gameConfig), Optional.empty());
     }
 }

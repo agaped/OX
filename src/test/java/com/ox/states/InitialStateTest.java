@@ -4,6 +4,8 @@ import com.ox.core.*;
 import com.ox.language.Language;
 import com.ox.language.LanguageLoader;
 import com.ox.validators.GameConfigValidator;
+import com.ox.validators.LanguageValidator;
+import com.ox.validators.PlayerNameAndSignValidator;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
@@ -22,7 +24,7 @@ public class InitialStateTest {
     public void checkIfMoveToTheNextStateWorksForInitialState_WhenCorrectInputProvided() {
         //given
         loader.load();
-        GameState init = new InitialState(new GameConfig(), new ScoreBoard(), new GameConfigValidator());
+        GameState init = new InitialState(new GameConfig(), new ScoreBoard(), new GameConfigValidator(), new PlayerNameAndSignValidator(), new LanguageValidator());
         String input = "W\nX";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -31,6 +33,8 @@ public class InitialStateTest {
         init = init.moveToTheNextState(new Scanner(System.in)::nextLine, System.out::println);
 
         //then
-        assertEquals(init.getClass(), new PlayState(Player.X, new Board(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard()).getClass());
+        assertEquals(init.getClass(), new PlayState(Player.X,Player.X, new Board(new GameConfig()), new VictoryChecker(), new GameConfig(), new ScoreBoard()).getClass());
     }
+
+
 }
