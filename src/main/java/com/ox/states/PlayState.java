@@ -17,6 +17,7 @@ public class PlayState implements GameState {
     private VictoryChecker victoryChecker;
     private GameConfig gameConfig;
     private ScoreBoard scoreBoard;
+    private BoardPrinter boardPrinter;
 
     public PlayState(Player startingPlayer,Player nextPlayer, Board board, VictoryChecker victoryChecker, GameConfig gameConfig, ScoreBoard scoreBoard) {
         this.currentPlayer = startingPlayer;
@@ -25,6 +26,7 @@ public class PlayState implements GameState {
         this.victoryChecker = victoryChecker;
         this.gameConfig = gameConfig;
         this.scoreBoard = scoreBoard;
+        this.boardPrinter=new BoardPrinter(board);
     }
 
     @Override
@@ -32,7 +34,8 @@ public class PlayState implements GameState {
         if (!this.board.isBoardFull()) {
             output.accept(Language.get("playPlayer") + " " + currentPlayer.getPlayerName() + Language.get("playMove"));
         }
-        this.board.printBoardState(output);
+
+        this.boardPrinter.printBoardState(output);
     }
 
     @Override

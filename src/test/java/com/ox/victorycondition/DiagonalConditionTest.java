@@ -2,6 +2,7 @@ package com.ox.victorycondition;
 
 import com.ox.coordinates.BoardFieldCoordinate;
 import com.ox.core.Board;
+import com.ox.core.BoardPrinter;
 import com.ox.core.GameConfig;
 import com.ox.core.Player;
 import com.ox.language.Language;
@@ -32,6 +33,7 @@ public class DiagonalConditionTest {
     Language lan = new Language();
     LanguageLoader loader = new LanguageLoader(lan, language);
     private static Board board;
+    private BoardPrinter boardPrinter;
 
     @BeforeMethod
     public void setUp() {
@@ -51,6 +53,7 @@ public class DiagonalConditionTest {
         gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
 
         board = new Board(gameConfig);
+        boardPrinter=new BoardPrinter(board);
     }
 
     private static void fillBoard(Player player, int... coordinates) {
@@ -77,7 +80,7 @@ public class DiagonalConditionTest {
     public void isThereAVictory_LastSignPutOnTheEdge(int first, int second, int third, int fourth, int fifth, int sixth, int seventh) {
         //given and when
         fillBoard(Player.X, first, second, third, fourth, fifth, sixth, seventh);
-        board.printBoardState(System.out::println);
+        boardPrinter.printBoardState(System.out::println);
         //then
         assertEquals(diagonalCondition.isThereAVictory(new BoardFieldCoordinate(first), board, X, gameConfig), Optional.of(X));
     }
@@ -86,7 +89,7 @@ public class DiagonalConditionTest {
     public void isThereAVictory_LastSignPutInTheMiddle(int first, int second, int third, int fourth, int fifth, int sixth, int seventh) {
         //given and when
         fillBoard(Player.X, first, second, third, fourth, fifth, sixth, seventh);
-        board.printBoardState(System.out::println);
+        boardPrinter.printBoardState(System.out::println);
         //then
         assertEquals(diagonalCondition.isThereAVictory(new BoardFieldCoordinate(second), board, X, gameConfig), Optional.of(X));
     }
@@ -95,7 +98,7 @@ public class DiagonalConditionTest {
     public void isThereAVictory_NoVictoryInADiagonalFound(int first, int second, int third, int fourth, int fifth, int sixth, int seventh) {
         //given and when
         fillBoard(Player.X, first, second, third, fourth, fifth, sixth, seventh);
-        board.printBoardState(System.out::println);
+        boardPrinter.printBoardState(System.out::println);
         //then
         assertEquals(diagonalCondition.isThereAVictory(new BoardFieldCoordinate(first), board, X, gameConfig), Optional.empty());
     }

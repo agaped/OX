@@ -34,43 +34,8 @@ public class Board {
         return !(currentFieldsNumber < maxFieldsNumber);
     }
 
-    public void printBoardState(Consumer<String> output) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 1; i <= getMaxFieldsNumber(); i++) {
 
-            result.append(" ");
-
-            if (i < 10) {
-                result.append("   ");
-            }
-            if (i >= 10 && i < 100) {
-                result.append("  ");
-            }
-            if (i >= 100 && i < 1000) {
-                result.append(" ");
-            }
-            if (this.boardState.containsKey(i)) {
-                if (i >= 10) {
-                    result.append(" ");
-                }
-                if (i >= 100) {
-                    result.append(" ");
-                }
-                if (i >= 1000) {
-                    result.append(" ");
-                }
-                result.append(this.boardState.get(i));
-            } else {
-                result.append(i);
-            }
-            if (i % this.columns == 0) {
-                result.append("\n");
-            }
-        }
-        output.accept(result.toString());
-    }
-
-    private int getMaxFieldsNumber() {
+    public int getMaxFieldsNumber() {
         return this.columns * this.rows;
     }
 
