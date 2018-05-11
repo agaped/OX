@@ -18,7 +18,7 @@
 
     <groupId>com.academy</groupId>
     <artifactId>javaacademy</artifactId>
-    <version>5.0</version>
+    <version>6.0</version>
     <name>OX game</name>
     <description>Implementation of OX console game in java using TDD methodology</description>
     <url>https://github.com/agaped/OX</url>
