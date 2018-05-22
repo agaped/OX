@@ -1,5 +1,5 @@
 gameWelcome:Witaj w grze kołko i krzyżyk!!!
-gameSetup:Czy chcesz zmienic domyślne ustawienia? t/n
+gameSetup:Czy chcesz zmienic domyślne ustawienia (gra na planszy 3x3, domyślni gracze X i O)? t/n
 setPlayerNameFor:Podaj imię dla gracza
 validatePlayerName:Zły format danych. Zachowaj format - Alicja, Tomek...
 boardSize:Podaj wymiary planszy - wiersze i kolumny, minimalny rozmiar to 3 3

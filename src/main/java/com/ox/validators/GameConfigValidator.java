@@ -15,7 +15,7 @@ public class GameConfigValidator {
         String input;
         while (true) {
             output.accept(Language.get("boardSize"));
-            input = userInput.get();
+            input = userInput.get().trim();
             if (input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
                 boardDimensionCoordinates = BoardDimensionCoordinates.parse(input);
                 if (boardDimensionCoordinates.getX() >= 3 && boardDimensionCoordinates.getY() >= 3) {
@@ -37,7 +37,7 @@ public class GameConfigValidator {
         int possibleCombination = 0;
         while (true) {
             output.accept(Language.get("winCom"));
-            String input = userInput.get();
+            String input = userInput.get().trim();
             if (input.matches("[1-9][0-9]*")) {
                 possibleCombination = Integer.parseInt(input);
                 if (possibleCombination >= 3) {

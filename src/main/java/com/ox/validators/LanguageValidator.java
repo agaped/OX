@@ -7,10 +7,10 @@ public class LanguageValidator {
 
     public String validateLanguageChosenByPlayer(Supplier<String> userInputProvider, Consumer<String> output) {
         output.accept("Choose language: en/pl");
-        String input = userInputProvider.get();
+        String input = userInputProvider.get().trim();
         while (!input.matches("(en|pl)")) {
             output.accept("Wrong input. Choose again");
-            input = userInputProvider.get();
+            input = userInputProvider.get().trim();
         }
         return input;
     }
