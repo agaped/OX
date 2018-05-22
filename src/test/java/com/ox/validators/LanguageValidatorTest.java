@@ -25,7 +25,7 @@ public class LanguageValidatorTest {
     @BeforeMethod
     public void setUp() {
         languageValidator = new LanguageValidator();
-        output = System.out::println;
+        output = s -> {};
         loader.load();
     }
 

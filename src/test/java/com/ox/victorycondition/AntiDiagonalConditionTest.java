@@ -45,12 +45,12 @@ public class AntiDiagonalConditionTest {
         boardSize = "4 8";
         inSize = new ByteArrayInputStream(boardSize.getBytes());
         System.setIn(inSize);
-        gameConfig.setBoardSize(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
+        gameConfig.setBoardSize(s -> {}, new Scanner(System.in)::nextLine, gameConfigValidator);
 
         winCombination = "4";
         inWin = new ByteArrayInputStream(winCombination.getBytes());
         System.setIn(inWin);
-        gameConfig.setLengthOfCombinationToWin(System.out::println, new Scanner(System.in)::nextLine, gameConfigValidator);
+        gameConfig.setLengthOfCombinationToWin(s -> {}, new Scanner(System.in)::nextLine, gameConfigValidator);
 
         board = new Board(gameConfig);
         boardPrinter = new BoardPrinter(board);
@@ -80,7 +80,6 @@ public class AntiDiagonalConditionTest {
     public void isThereAVictory_LastSignPutOnTheEdge(int first, int second, int third, int fourth, int fifth, int sixth, int seventh) {
         //given and when
         fillBoard(Player.X, first, second, third, fourth, fifth, sixth, seventh);
-        boardPrinter.printBoardState(System.out::println);
         //then
         assertEquals(antiDiagonalCondition.isThereAVictory(new BoardFieldCoordinate(first), board, X, gameConfig), Optional.of(X));
     }
@@ -89,7 +88,6 @@ public class AntiDiagonalConditionTest {
     public void isThereAVictory_LastSignPutInTheMiddle(int first, int second, int third, int fourth, int fifth, int sixth, int seventh) {
         //given and when
         fillBoard(Player.X, first, second, third, fourth, fifth, sixth, seventh);
-        boardPrinter.printBoardState(System.out::println);
         //then
         assertEquals(antiDiagonalCondition.isThereAVictory(new BoardFieldCoordinate(second), board, X, gameConfig), Optional.of(X));
     }
@@ -98,7 +96,6 @@ public class AntiDiagonalConditionTest {
     public void isThereAVictory_NoVictoryInADiagonalFound(int first, int second, int third, int fourth, int fifth, int sixth, int seventh) {
         //given and when
         fillBoard(Player.X, first, second, third, fourth, fifth, sixth, seventh);
-        boardPrinter.printBoardState(System.out::println);
         //then
         assertEquals(antiDiagonalCondition.isThereAVictory(new BoardFieldCoordinate(first), board, X, gameConfig), Optional.empty());
     }

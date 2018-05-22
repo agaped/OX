@@ -25,7 +25,7 @@ public class GameConfigValidatorTest {
     @BeforeMethod
     public void setUp() {
         gameConfigValidator = new GameConfigValidator();
-        output = System.out::println;
+        output = s -> {};
         loader.load();
     }
 

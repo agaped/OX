@@ -27,7 +27,7 @@ public class BoardTest {
 
     @BeforeMethod
     public void setUp() {
-        output = System.out::println;
+        output = s -> {};
         gameConfig = new GameConfig();
         input = "3 3";
         InputStream in = new ByteArrayInputStream(input.getBytes());
