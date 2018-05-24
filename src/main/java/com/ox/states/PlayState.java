@@ -45,6 +45,10 @@ public class PlayState implements GameState {
         }
 
         String input = userInputProvider.get().trim();
+        if(input.equalsIgnoreCase("quit")||input.equalsIgnoreCase("koniec")){
+            return new EndState(scoreBoard);
+        }
+
         if (!PlayerMoveValidator.validateInput(input, output)) {
             return this;
         }

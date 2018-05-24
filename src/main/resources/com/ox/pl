@@ -22,4 +22,5 @@ endThanks:Dziękujemy za grę!
 ensStat:Podsumowanie
 endPoints: punktów
 endAskToContinue:Czy chcesz zagrać ponownie? t/n
-endUnknownComment:Nieznana komenda. Kończę grę...
+endUnknownComment:Nieznana komenda. Wpisz ponownie t/n
+quit:Aby zakończyc grę w trakcie wpisz - koniec

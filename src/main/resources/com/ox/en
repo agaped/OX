@@ -22,4 +22,5 @@ endThanks:Thanks for playing!
 ensStat:Statistics:
 endPoints: points:
 endAskToContinue:Do you want to play again? y/n
-endUnknownComment:Unknown comment. Quitting the game...
+endUnknownComment:Unknown comment. Type one more time y/n
+quit:To quit game during play type - quit

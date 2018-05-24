@@ -47,6 +47,7 @@ public class InitialState implements GameState {
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
+        output.accept("\n"+Language.get("quit")+"\n");
         return new PlayState(startingPlayer, nextPlayer, new Board(gameConfig), new VictoryChecker(), gameConfig, scoreBoard);
     }
 
