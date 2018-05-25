@@ -31,15 +31,18 @@ public class EndState implements GameState {
 
     @Override
     public GameState moveToTheNextState(Supplier<String> userInputProvider, Consumer<String> output) {
-        String input = userInputProvider.get();
+        String input = userInputProvider.get().trim().toLowerCase();
+        while(!input.matches("[ynt]")){
+            output.accept(Language.get("endUnknownComment"));
+            input = userInputProvider.get().trim();
+        }
+
         if (input.equals("y") || input.equals("t")) {
             new Game(new Scanner(System.in)::nextLine, System.out::println, new GameConfig(), new ScoreBoard()).start();
             return null;
-        } else if (input.equals("n")) {
-            return null;
-        } else {
-            output.accept(Language.get("endUnknownComment"));
-            return null;
+        } else{
+             System.exit(0);
+             return null;
         }
     }
 }

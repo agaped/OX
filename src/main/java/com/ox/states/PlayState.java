@@ -32,7 +32,7 @@ public class PlayState implements GameState {
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         if (!this.board.isBoardFull()) {
-            output.accept(Language.get("playPlayer") + " " + currentPlayer.getPlayerName() + Language.get("playMove"));
+            output.accept(Language.get("playPlayer") + " " + currentPlayer.getPlayerName()+" ["+currentPlayer+"]" + Language.get("playMove"));
         }
 
         this.boardPrinter.printBoardState(output);
@@ -44,7 +44,11 @@ public class PlayState implements GameState {
             return new DrawState(scoreBoard, currentPlayer, nextPlayer, gameConfig);
         }
 
-        String input = userInputProvider.get();
+        String input = userInputProvider.get().trim();
+        if(input.equalsIgnoreCase("quit")||input.equalsIgnoreCase("koniec")){
+            return new EndState(scoreBoard);
+        }
+
         if (!PlayerMoveValidator.validateInput(input, output)) {
             return this;
         }

@@ -27,7 +27,7 @@ public class PlayerNameAndSignValidatorTest {
     @BeforeMethod
     public void setUp() {
         playerNameAndSignValidator = new PlayerNameAndSignValidator();
-        output = System.out::println;
+        output = s -> {};;
         loader.load();
     }
 

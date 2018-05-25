@@ -1,9 +1,9 @@
 gameWelcome:Witaj w grze kołko i krzyżyk!!!
-gameSetup:Czy chcesz zmienic domyślne ustawienia? t/n
+gameSetup:Czy chcesz zmienic domyślne ustawienia (gra na planszy 3x3, domyślni gracze X i O)? t/n
 setPlayerNameFor:Podaj imię dla gracza
 validatePlayerName:Zły format danych. Zachowaj format - Alicja, Tomek...
 boardSize:Podaj wymiary planszy - wiersze i kolumny, minimalny rozmiar to 3 3
-boardSizeExceeded:Rozmiar planszy nie może przekroczyć 10 000
+boardSizeExceeded:Wymiar wiersza i kolumny nie moze przekroczyc 100
 boardSizeMin:Najmniejszy możliwy rozmiar planszy wynosi 3x3
 boardWrongFormat:Zły format danych, spróbuj ponownie
 winCom:Podaj długość wygranej, najmniejszy rozmiar to 3
@@ -22,4 +22,5 @@ endThanks:Dziękujemy za grę!
 ensStat:Podsumowanie
 endPoints: punktów
 endAskToContinue:Czy chcesz zagrać ponownie? t/n
-endUnknownComment:Nieznana komenda. Kończę grę...
+endUnknownComment:Nieznana komenda. Wpisz ponownie t/n
+quit:Aby zakończyc grę w trakcie wpisz - koniec

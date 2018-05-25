@@ -10,10 +10,10 @@ public class PlayerNameAndSignValidator {
 
     public void validatePlayerName(Consumer<String> output, Supplier<String> userInputProvider, Player player) {
         output.accept(Language.get("setPlayerNameFor")+" "+player);
-        String input=userInputProvider.get();
+        String input=userInputProvider.get().trim();
         while(!input.matches("[A-Z][a-z]+")) {
             output.accept(Language.get("validatePlayerName"));
-            input=userInputProvider.get();
+            input=userInputProvider.get().trim();
         }
         player.setPlayerName(input);
     }
@@ -21,7 +21,7 @@ public class PlayerNameAndSignValidator {
     public String validateGivenSign(Consumer<String> output, Supplier<String> userInputProvider, String userInput) {
         while (!userInput.matches("[XO]")) {
             output.accept(Language.get("initWrongChar"));
-            userInput = userInputProvider.get();
+            userInput = userInputProvider.get().trim();
         }
         return userInput;
     }

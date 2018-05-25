@@ -29,7 +29,7 @@ public class PlayerMoveValidatorTest {
 
     @BeforeMethod
     public void setUp() {
-        output = System.out::println;
+        output = s -> {};
         gameConfig = new GameConfig();
         input = "4 3";
         InputStream in = new ByteArrayInputStream(input.getBytes());
