@@ -3,7 +3,7 @@ gameSetup:Do you want to change default settings (play with board 3x3 with defau
 setPlayerNameFor:Provide name for player
 validatePlayerName:Wrong format. Follow the pattern - Adam, Alicja...
 boardSize:Provide board dimension - row and column, minimal board size is 3 3
-boardSizeExceeded:Total size of the board cannot exceed 10 000. Try again
+boardSizeExceeded:Row and column cannot exceed 100. Try again
 boardSizeMin:Minimal board size is 3 3
 boardWrongFormat:Wrong format! Try again
 winCom:Provide length of combination to win, minimal length is 3

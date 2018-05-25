@@ -19,7 +19,7 @@ public class GameConfigValidator {
             if (input.matches("[1-9][0-9]*[\" \"][1-9][0-9]*")) {
                 boardDimensionCoordinates = BoardDimensionCoordinates.parse(input);
                 if (boardDimensionCoordinates.getX() >= 3 && boardDimensionCoordinates.getY() >= 3) {
-                    if (boardDimensionCoordinates.getX() * boardDimensionCoordinates.getY() <= 10000) {
+                    if (boardDimensionCoordinates.getX() <= 100 && boardDimensionCoordinates.getY() <= 100) {
                         return Optional.of(input);
                     } else {
                         output.accept(Language.get("boardSizeExceeded"));

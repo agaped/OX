@@ -52,7 +52,6 @@ public class InitialState implements GameState {
     }
 
     private String validateDefaultSetup(Consumer<String> output, Supplier<String> userInputProvider, String setup) {
-        output.accept("Do you want to change default settings (play with board 3x3 with default players X and O)? y/n");
         while (!setup.matches("[y|n]")) {
             output.accept("Wrong input. Choose again: y/n");
             setup = userInputProvider.get().trim().toLowerCase();
