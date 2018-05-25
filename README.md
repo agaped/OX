@@ -6,7 +6,7 @@ To play it:
 
 >mvn clean install 
 
->java -jar target/javaacademy-{version}.jar.jar 
+>java -jar target/javaacademy-{version}.jar
 
 To run it with script:
 
