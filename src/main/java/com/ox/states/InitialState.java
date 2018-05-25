@@ -33,7 +33,7 @@ public class InitialState implements GameState {
     @Override
     public void beginCurrentState(Consumer<String> output, Supplier<String> userInputProvider) {
         output.accept("Do you want to change default settings (play with board 3x3 with default players X and O)? y/n");
-        String setup = userInputProvider.get().trim();
+        String setup = userInputProvider.get().trim().toLowerCase();
         setup = validateDefaultSetup(output, userInputProvider, setup);
         if (setup.equals("n")) {
             loadDefaultSettings();
@@ -52,9 +52,10 @@ public class InitialState implements GameState {
     }
 
     private String validateDefaultSetup(Consumer<String> output, Supplier<String> userInputProvider, String setup) {
+        output.accept("Do you want to change default settings (play with board 3x3 with default players X and O)? y/n");
         while (!setup.matches("[y|n]")) {
-            output.accept("Do you want to change default settings (play with board 3x3 with default players X and O)? y/n");
-            setup = userInputProvider.get().trim();
+            output.accept("Wrong input. Choose again: y/n");
+            setup = userInputProvider.get().trim().toLowerCase();
         }
         return setup;
     }
